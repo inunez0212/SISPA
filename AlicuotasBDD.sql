@@ -70,9 +70,10 @@ CREATE TABLE public.usuario (
 CREATE TABLE public.alicuota (
 	id serial NOT NULL,
 	iddepartamento int4 NULL,
+	usuario varchar(100) NULL,
 	mes varchar(15) NULL,
 	anio varchar(15) NULL,
-	valoralicuota numeric(10,3) NULL,
+	valoralicuota decimal(10,3) NULL,
 	valorpagado numeric(10,3) NULL,
 	telefono1 varchar(13) NULL,
 	estado varchar(1) NULL,
