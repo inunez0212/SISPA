@@ -1,5 +1,10 @@
-target/
+*/target/*
 .classpath
 .project
 MANIFEST.MF
 pom.properties
+/target/
+*.class
+/target
+target/**
+/target/**
