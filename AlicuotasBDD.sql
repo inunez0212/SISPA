@@ -77,6 +77,7 @@ CREATE TABLE public.alicuota (
 	valorpagado numeric(10,3) NULL,
 	telefono1 varchar(13) NULL,
 	estado varchar(1) NULL,
+	fechapago timestamp,  
 	CONSTRAINT alicuota_pkey PRIMARY KEY (id),
 	CONSTRAINT alicuota_iddepartamento_fkey FOREIGN KEY (iddepartamento) REFERENCES departamento(id)
 );
