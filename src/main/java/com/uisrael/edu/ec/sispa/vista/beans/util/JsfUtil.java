@@ -1,4 +1,4 @@
-package com.uisrael.edu.ec.crigm.vista.beans.util;
+package com.uisrael.edu.ec.sispa.vista.beans.util;
 
 import java.util.List;
 

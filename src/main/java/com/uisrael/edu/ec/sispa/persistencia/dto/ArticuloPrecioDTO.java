@@ -4,7 +4,9 @@
 package com.uisrael.edu.ec.sispa.persistencia.dto;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -24,31 +26,36 @@ import lombok.Data;
  */
 @Data
 @Entity
-@Table(name = "catalogo")
-public class CatalogoDTO implements Serializable{
+@Table(name = "ArticuloPrecio")
+public class ArticuloPrecioDTO implements Serializable{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -3938524883609070734L;
+	private static final long serialVersionUID = 6369479496037641333L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
 	private Integer id;
 	
-	private String nombreCatalogo;
+	private BigDecimal costobruto;
 	
-	private String valorCatalogo;
+	private BigDecimal costototal;
+	
+	private BigDecimal utilidad;
+	
+	private BigDecimal preciototal;
+	
+	private Date fecharegistro;
+	
+	private Integer usuarioregistro;
 	
 	private String estado;
-
-	@JoinColumn(name = "catalogorelacionado", referencedColumnName = "id")
+	
+	@JoinColumn(name = "idarticulo", referencedColumnName = "id")
     @ManyToOne
-	private CatalogoDTO catalogoRelacionado;
+	private ArticuloDTO articuloDTO;
 	
-	@OneToMany(mappedBy = "catalogoRelacionado")
-    private Collection<CatalogoDTO> catalogoRelacionadoCOL;
-	
-	
+
 }
