@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.web.filter.RequestContextFilter;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.uisrael.edu.ec.crigm") 
+@ComponentScan(basePackages = "com.uisrael.edu.ec.sispa") 
 
 public class SISPAApplication{
 
@@ -19,6 +19,5 @@ public class SISPAApplication{
 	public static void main(String[] args)  {
 		SpringApplication.run(SISPAApplication.class, args);
 	}
-
   
 }

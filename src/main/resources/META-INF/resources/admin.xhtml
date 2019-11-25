@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                template="/admin-base.xhtml">
+    
+    <ui:param name="bodyStyleClass" value="sidebar-mini #{not empty sidebarCollapse and sidebarCollapse eq 'true' ? 'sidebar-collapse':''} "/>
+
+    <ui:define name="template-header">
+        <a href="#{request.contextPath}/admin.xhtml" class="logo">
+            <span class="logo-mini">
+                <ui:insert name="logo-mini"/>
+            </span>
+            <span class="logo-lg">
+                <ui:insert name="logo-lg"/>
+            </span>
+            <span class="logo-lg">
+                <ui:insert name="logo"/>
+            </span>SISPA
+        </a>
+        <nav class="navbar navbar-static-top">
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <span class="sr-only"></span>
+            </a>
+            <div class="navbar-custom-menu">
+                <ui:insert name="top-menu"/>
+            </div>
+
+            <div class="center-navbar">
+                <ui:insert name="center-header">SISTEMA DEL PORTAL DE ALCALA</ui:insert>
+            </div>
+            <div class="mobile-header">
+                <h4></h4>
+            </div>
+        </nav>
+    </ui:define>
+
+
+    <ui:define name="template-menu">
+        <!-- side menu -->
+        <aside id="sidebar" class="main-sidebar slideout-menu">
+            <div>
+                <ui:insert name="menu-begin"/>
+                <ui:fragment rendered="#{adminConfig.renderMenuSearch}">
+                    <div class="sidebar-form">
+                        <ul id="menu-search" class="nav navbar-nav" role="menu">
+                            <li class="dropdown" >
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true"/>
+
+                                <ul class="dropdown-menu" role="menu">
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </ui:fragment>
+                <section class="sidebar">
+                    <ui:insert name="menu">MENU</ui:insert>
+                </section>
+                <ui:insert name="menu-end"/>
+            </div>
+        </aside>
+    </ui:define>
+
+    <ui:define name="body-end">
+        <h:outputScript library="js" name="slideout.min.js" target="head" rendered="#{adminConfig.enableSlideMenu and (empty enableSlideMenu or enableSlideMenu)}"/>
+        <h:outputScript library="js" name="adminslide.js" target="head" rendered="#{adminConfig.enableSlideMenu and (empty enableSlideMenu or enableSlideMenu)}"/>
+        <ui:fragment rendered="#{not adminConfig.enableSlideMenu or (not empty enableSlideMenu and enableSlideMenu eq 'false')}">
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    $('.slideout-menu').removeClass('slideout-menu');
+                    $('.slideout-panel').removeClass('slideout-panel');
+                });
+
+            </script>
+        </ui:fragment>
+        <ui:insert name="body-end"/>
+    </ui:define>
+
+
+</ui:composition>

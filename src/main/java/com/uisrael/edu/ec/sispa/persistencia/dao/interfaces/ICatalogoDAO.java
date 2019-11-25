@@ -1,41 +1,42 @@
 /**
  * 
  */
-package com.uisrael.edu.ec.sispa.persistencia.dao;
+package com.uisrael.edu.ec.sispa.persistencia.dao.interfaces;
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
+
 /**
  * @author Ivan
- * Maneja los metodos CRUD
+ *
  */
 @Repository
-public interface GenericoDAO<T extends Serializable, ID extends Serializable>  extends JpaRepository<T, ID>{
+public interface ICatalogoDAO  extends JpaRepository<CatalogoDTO, Long>{
 	
 	/**
 	 * Buscar entidad por estado
 	 * @param estado
 	 * @return
 	 */
-	public List<T> findByEstado(String estado);
+	public List<CatalogoDTO> findByEstado(String estado);
 	
 	/**
 	 * Eliminar entidad
 	 */
 	@Transactional
-	void delete(T entity);
+	void delete(CatalogoDTO entity);
 	
 	/**
 	 * Obtiene entidad por ID
 	 * @param id
 	 * @return
 	 */
-	T getOne(Long id);
+	CatalogoDTO getOne(Long id);
 	
 	/**
 	 * Contar por estado
@@ -50,6 +51,6 @@ public interface GenericoDAO<T extends Serializable, ID extends Serializable>  e
 	 * @return
 	 */
 	@Transactional
-	T save(T entity);
-	
+	CatalogoDTO save(CatalogoDTO entity);
+
 }

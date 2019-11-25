@@ -93,7 +93,11 @@
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
-		</dependency>				
+		</dependency>	
+		<dependency>
+		    <groupId>com.github.adminfaces</groupId>
+		    <artifactId>admin-theme</artifactId>
+		</dependency>			
 	</dependencies>	
 	
 	<build>

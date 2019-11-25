@@ -5,14 +5,19 @@
   xmlns:p="http://primefaces.org/ui">
 
 <h:head>
- <title>Simple login form with social login buttons using HTML and CSS</title>
+ <title>Alicuotas - Login</title>
 	<h:outputStylesheet href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
 </h:head>
 
 <h:body>
 	<div class="login-form">
-		 <h:form id="helloworld-form">
-			<h1>Identificarse</h1>
+		<h:form id="helloworld-form">
+		<h1>Identificarse</h1>
+		
+        <p:inputText id="cedula" value="#{sessionController.cedula}" placeholder= "ID"/>
+        <p:inputText id="contrasenia" value="#{sessionController.contrasenia}" placeholder ="Pass"/>
+        <p:commandButton id="submit" value="Ingresar" class = "login-btn" />
+          
 		</h:form>
 	</div>
 
@@ -45,6 +50,7 @@ body {
     display: table;
     padding: 15px 30px 30px;
     box-sizing: border-box;
+    margin-top: 20px;
 }
 .form-group {
 	float: left;
@@ -60,7 +66,8 @@ body {
     border: 1px solid #ccc;
     box-sizing: border-box;
     font-size: 15px;
-    padding-left: 75px;
+    padding-left: 15px;
+    margin: 10px
 }
 .login-form .form-group .input-icon {
     font-size: 15px;
@@ -79,11 +86,10 @@ body {
 }
 .login-form .login-btn {
 	background: #45aba6;
-	padding: 11px 50px;
 	border-color: #45aba6;
 	color: #fff;
 	text-align: center;
-	margin: 0 auto;
+	margin: 10px;
 	font-size: 20px;
 	border: 1px solid #45aba6;
 	border-radius: 44px;
@@ -113,7 +119,12 @@ body {
 }
 .login-form button:hover{
 	opacity: 0.9;
+	border-color: #45aba6;
+	background-color:#4d6160;
 }
+
+
+
 .login-form .seperator {
 	float: left;
 	width: 100%;

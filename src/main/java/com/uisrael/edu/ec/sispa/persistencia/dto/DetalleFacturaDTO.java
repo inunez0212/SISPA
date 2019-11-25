@@ -3,6 +3,7 @@
  */
 package com.uisrael.edu.ec.sispa.persistencia.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Basic;
@@ -21,8 +22,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "detallefactura")
-public class DetalleFacturaDTO {
+public class DetalleFacturaDTO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1886148624396210302L;
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)

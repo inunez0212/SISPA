@@ -3,6 +3,8 @@
  */
 package com.uisrael.edu.ec.sispa.persistencia.dto;
 
+import java.io.Serializable;
+
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,8 +21,13 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "cliente")
-public class ClienteDTO {
+public class ClienteDTO implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6119964613678291836L;
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
