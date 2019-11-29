@@ -9,6 +9,6 @@ import com.uisrael.edu.ec.sispa.persistencia.dao.interfaces.IDetalleFacturaDAO;
  * @author Ivan
  *
  */
-public class DetalleFacturaDAO implements IDetalleFacturaDAO {
+public class DetalleFacturaDAO {
 
 }

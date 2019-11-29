@@ -9,6 +9,6 @@ import com.uisrael.edu.ec.sispa.persistencia.dao.interfaces.IAlicuotaDAO;
  * @author Ivan
  *
  */
-public class AlicuotaDAO implements IAlicuotaDAO {
+public class AlicuotaDAO {
 
 }

@@ -9,6 +9,6 @@ import com.uisrael.edu.ec.sispa.persistencia.dao.interfaces.IArticuloDAO;
  * @author Ivan
  *
  */
-public class ArticuloDAO implements IArticuloDAO {
+public class ArticuloDAO  {
 
 }

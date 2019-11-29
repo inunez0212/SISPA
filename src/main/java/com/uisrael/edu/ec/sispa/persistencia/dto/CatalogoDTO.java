@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -33,12 +34,13 @@ public class CatalogoDTO implements Serializable{
 	private static final long serialVersionUID = -3938524883609070734L;
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-	private Integer id;
+	private String id;
 	
+	@Column(name="nombrecatalogo")
 	private String nombreCatalogo;
 	
+	@Column(name="valorcatalogo")
 	private String valorCatalogo;
 	
 	private String estado;
