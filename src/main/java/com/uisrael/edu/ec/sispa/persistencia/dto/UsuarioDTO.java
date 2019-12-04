@@ -14,13 +14,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 /**
  * @author Ivan
  *
  */
-@Data
 @Entity
 @Table(name = "usuario")
 public class UsuarioDTO implements Serializable{
@@ -54,5 +51,146 @@ public class UsuarioDTO implements Serializable{
 	@JoinColumn(name = "tipousuario", referencedColumnName = "id")
     @ManyToOne
 	private CatalogoDTO tipoUsuario;
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the cedula
+	 */
+	public String getCedula() {
+		return cedula;
+	}
+
+	/**
+	 * @param cedula the cedula to set
+	 */
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the apellido
+	 */
+	public String getApellido() {
+		return apellido;
+	}
+
+	/**
+	 * @param apellido the apellido to set
+	 */
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	/**
+	 * @return the cargo
+	 */
+	public String getCargo() {
+		return cargo;
+	}
+
+	/**
+	 * @param cargo the cargo to set
+	 */
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	/**
+	 * @return the direccion
+	 */
+	public String getDireccion() {
+		return direccion;
+	}
+
+	/**
+	 * @param direccion the direccion to set
+	 */
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
+	}
+
+	/**
+	 * @return the telefono1
+	 */
+	public String getTelefono1() {
+		return telefono1;
+	}
+
+	/**
+	 * @param telefono1 the telefono1 to set
+	 */
+	public void setTelefono1(String telefono1) {
+		this.telefono1 = telefono1;
+	}
+
+	/**
+	 * @return the telefono2
+	 */
+	public String getTelefono2() {
+		return telefono2;
+	}
+
+	/**
+	 * @param telefono2 the telefono2 to set
+	 */
+	public void setTelefono2(String telefono2) {
+		this.telefono2 = telefono2;
+	}
+
+	/**
+	 * @return the estado
+	 */
+	public String getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	/**
+	 * @return the tipoUsuario
+	 */
+	public CatalogoDTO getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	/**
+	 * @param tipoUsuario the tipoUsuario to set
+	 */
+	public void setTipoUsuario(CatalogoDTO tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
+	
 	
 }

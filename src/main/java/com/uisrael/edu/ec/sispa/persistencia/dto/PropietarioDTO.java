@@ -14,13 +14,10 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 /**
  * @author Ivan
  *
  */
-@Data
 @Entity
 @Table(name = "propietario")
 public class PropietarioDTO implements Serializable{
@@ -50,4 +47,117 @@ public class PropietarioDTO implements Serializable{
 	@OneToMany(mappedBy = "propietarioDTO")
     private Collection<DepartamentoDTO> departamentosCOL;
 
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the cedula
+	 */
+	public String getCedula() {
+		return cedula;
+	}
+
+	/**
+	 * @param cedula the cedula to set
+	 */
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+	/**
+	 * @return the nombre
+	 */
+	public String getNombre() {
+		return nombre;
+	}
+
+	/**
+	 * @param nombre the nombre to set
+	 */
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	/**
+	 * @return the apellido
+	 */
+	public String getApellido() {
+		return apellido;
+	}
+
+	/**
+	 * @param apellido the apellido to set
+	 */
+	public void setApellido(String apellido) {
+		this.apellido = apellido;
+	}
+
+	/**
+	 * @return the email
+	 */
+	public String getEmail() {
+		return email;
+	}
+
+	/**
+	 * @param email the email to set
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	/**
+	 * @return the telefono1
+	 */
+	public String getTelefono1() {
+		return telefono1;
+	}
+
+	/**
+	 * @param telefono1 the telefono1 to set
+	 */
+	public void setTelefono1(String telefono1) {
+		this.telefono1 = telefono1;
+	}
+
+	/**
+	 * @return the estado
+	 */
+	public String getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	/**
+	 * @return the departamentosCOL
+	 */
+	public Collection<DepartamentoDTO> getDepartamentosCOL() {
+		return departamentosCOL;
+	}
+
+	/**
+	 * @param departamentosCOL the departamentosCOL to set
+	 */
+	public void setDepartamentosCOL(Collection<DepartamentoDTO> departamentosCOL) {
+		this.departamentosCOL = departamentosCOL;
+	}
+
+	
 }

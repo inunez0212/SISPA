@@ -4,9 +4,9 @@
 package com.uisrael.edu.ec.sispa.vista.beans.controlador;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,20 +35,31 @@ public class CatalogoController implements Serializable{
 	
 	private CatalogoDTO catalogoDTO;
 	
+	private CatalogoDTO catalogoDTOSelected;
+	
 	private List<CatalogoDTO> listaCatalogos ;
 	
 	private String codigoRelacionado;
 	
 	private CatalogoController () {
-		catalogoDTO = new CatalogoDTO();
-		listaCatalogos = new ArrayList<>();
+		
 	}
+	
+	@PostConstruct
+	public void inicializar() {
+		this.listaCatalogos = this.catalogoServicio.listarTodos();
+		this.catalogoDTO = new CatalogoDTO();
+		
+	}
+	
+	
 	
 	
 	
 	public void registrar() {
     	try {
     		this.catalogoServicio.registrar(catalogoDTO);
+    		inicializar();
     		JsfUtil.addSuccessMessage("Catalogo creado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
@@ -146,6 +157,21 @@ public class CatalogoController implements Serializable{
 	 */
 	public void setListaCatalogos(List<CatalogoDTO> listaCatalogos) {
 		this.listaCatalogos = listaCatalogos;
+	}
+
+
+	/**
+	 * @return the catalogoDTOSelected
+	 */
+	public CatalogoDTO getCatalogoDTOSelected() {
+		return catalogoDTOSelected;
+	}
+
+	/**
+	 * @param catalogoDTOSelected the catalogoDTOSelected to set
+	 */
+	public void setCatalogoDTOSelected(CatalogoDTO catalogoDTOSelected) {
+		this.catalogoDTOSelected = catalogoDTOSelected;
 	}
 
 }

@@ -16,13 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.Data;
-
 /**
  * @author Ivan
  *
  */
-@Data
 @Entity
 @Table(name = "departamento")
 public class DepartamentoDTO implements Serializable{
@@ -51,5 +48,104 @@ public class DepartamentoDTO implements Serializable{
 	
 	@OneToMany(mappedBy = "departamentoDTO")
     private Collection<AlicuotaDTO> alicuotasCOL;
+
+	/**
+	 * @return the id
+	 */
+	public Integer getId() {
+		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return the bloque
+	 */
+	public String getBloque() {
+		return bloque;
+	}
+
+	/**
+	 * @param bloque the bloque to set
+	 */
+	public void setBloque(String bloque) {
+		this.bloque = bloque;
+	}
+
+	/**
+	 * @return the numero
+	 */
+	public String getNumero() {
+		return numero;
+	}
+
+	/**
+	 * @param numero the numero to set
+	 */
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	/**
+	 * @return the telefono
+	 */
+	public String getTelefono() {
+		return telefono;
+	}
+
+	/**
+	 * @param telefono the telefono to set
+	 */
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
+	}
+
+	/**
+	 * @return the estado
+	 */
+	public String getEstado() {
+		return estado;
+	}
+
+	/**
+	 * @param estado the estado to set
+	 */
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+
+	/**
+	 * @return the propietarioDTO
+	 */
+	public PropietarioDTO getPropietarioDTO() {
+		return propietarioDTO;
+	}
+
+	/**
+	 * @param propietarioDTO the propietarioDTO to set
+	 */
+	public void setPropietarioDTO(PropietarioDTO propietarioDTO) {
+		this.propietarioDTO = propietarioDTO;
+	}
+
+	/**
+	 * @return the alicuotasCOL
+	 */
+	public Collection<AlicuotaDTO> getAlicuotasCOL() {
+		return alicuotasCOL;
+	}
+
+	/**
+	 * @param alicuotasCOL the alicuotasCOL to set
+	 */
+	public void setAlicuotasCOL(Collection<AlicuotaDTO> alicuotasCOL) {
+		this.alicuotasCOL = alicuotasCOL;
+	}
+
 	
 }

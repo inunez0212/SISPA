@@ -124,13 +124,12 @@
                         </div>
                     </div>
                 </ui:fragment>
-
                 <ui:insert name="body"/>
             </section>
             <ui:insert name="content-end"/>
         </h:panelGroup>
 
-        <footer class="main-footer">
+        <footer >
             <ui:insert name="footer"/>
         </footer>
         <div id="scrollTop" class="ripplelink scroll-top" onclick="window.scrollTo(0, 0)">
@@ -204,20 +203,7 @@
                                             </span>
                                         <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.sidebar-expand-hover']}"/></p>
                                     </div>
-                                    <div class="form-group">
-                                            <span class="control-sidebar-subheading">
-                                                <p:outputLabel id="control-sidebar-toggle-label" value="#{adm['controlsidebar.label.sidebar-slide']}" for="control-sidebar-toggle"/>
-                                                <p:selectBooleanCheckbox value="#{layoutMB.fixedControlSidebar}" id="control-sidebar-toggle" widgetVar="fixedControlSidebar" styleClass="pull-right black"/>
-                                            </span>
-                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.sidebar-slide']}"/></p>
-                                    </div>
-                                    <div class="form-group">
-                                            <span class="control-sidebar-subheading">
-                                                <p:outputLabel value="#{adm['controlsidebar.label.sidebar-skin']}" for="sidebar-skin"/>
-                                                <p:selectBooleanCheckbox value="#{layoutMB.darkControlSidebarSkin}" id="sidebar-skin" widgetVar="controlSidebarSkin" styleClass="pull-right black"/>
-                                            </span>
-                                        <p><h:outputText escape="false" value="#{adm['controlsidebar.txt.sidebar-skin']}"/></p>
-                                    </div>
+                                    
 
                                     <h4 class="control-sidebar-heading">#{adm['controlsidebar.header.skins']}</h4>
                                     <ul class="list-unstyled clearfix">
