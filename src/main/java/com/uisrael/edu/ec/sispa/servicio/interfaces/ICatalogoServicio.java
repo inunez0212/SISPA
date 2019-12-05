@@ -18,25 +18,27 @@ public interface ICatalogoServicio {
 	 * @param usuario
 	 * @return
 	 */
-	public CatalogoDTO registrar(CatalogoDTO catalogo);
+	CatalogoDTO registrar(CatalogoDTO catalogo);
 
 	/**
 	 * Actualiza un catalogo
 	 * @param usuario
 	 * @return
 	 */
-	public CatalogoDTO actualizar(CatalogoDTO catalogo);
+	CatalogoDTO actualizar(CatalogoDTO catalogo);
 
 	/**
 	 * Lista los catalogos activos
 	 * @return
 	 */
-	public List<CatalogoDTO> listarTodos();
+	List<CatalogoDTO> listarTodos();
 
 	/**
 	 * Elimina un catalogo
 	 * @param catalogo
 	 */
-	public void eliminar(CatalogoDTO catalogo);
+	void eliminar(CatalogoDTO catalogo);
+	
+	CatalogoDTO buscarPorId(String id);
 
 }

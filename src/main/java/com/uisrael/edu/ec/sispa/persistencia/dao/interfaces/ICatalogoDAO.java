@@ -36,7 +36,7 @@ public interface ICatalogoDAO  extends JpaRepository<CatalogoDTO, Long>{
 	 * @param id
 	 * @return
 	 */
-	CatalogoDTO getOne(Long id);
+	CatalogoDTO findById(String id);
 	
 	/**
 	 * Contar por estado

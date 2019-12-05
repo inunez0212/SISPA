@@ -57,5 +57,9 @@ public class CatalogoServicio implements ICatalogoServicio {
 	public void eliminar(CatalogoDTO catalogo) {
 		this.catalogoDAO.delete(catalogo);
 	}
-	
+
+	@Override
+	public CatalogoDTO buscarPorId(String id) {
+		return this.catalogoDAO.findById(id);
+	}
 }

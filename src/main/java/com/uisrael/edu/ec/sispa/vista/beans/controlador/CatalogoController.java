@@ -49,28 +49,55 @@ public class CatalogoController implements Serializable{
 	public void inicializar() {
 		this.listaCatalogos = this.catalogoServicio.listarTodos();
 		this.catalogoDTO = new CatalogoDTO();
-		
+		this.catalogoDTOSelected=null;
+		this.codigoRelacionado ="";
 	}
-	
-	
-	
-	
 	
 	public void registrar() {
     	try {
-    		this.catalogoServicio.registrar(catalogoDTO);
-    		inicializar();
-    		JsfUtil.addSuccessMessage("Catalogo creado correctamente");
+    		if(this.validarRegistro()) {
+    			this.catalogoServicio.registrar(catalogoDTO);
+    			inicializar();
+    			JsfUtil.addSuccessMessage("Catalogo creado correctamente");
+    		}
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo crear el catalogoValor");
 		}
     }
 
-    public void actualizar() {
+    private boolean validarRegistro() {
+		boolean datosValidados = true;
+		if(this.catalogoDTO.getId()==null || this.catalogoDTO.getId().equals("")) {
+			JsfUtil.addErrorMessage("ID no puede estar vacio");
+			datosValidados= false;
+		}
+		if(this.catalogoDTO.getNombreCatalogo()==null || this.catalogoDTO.getNombreCatalogo().equals("")) {
+			JsfUtil.addErrorMessage("Nombre no puede estar vacio");
+			datosValidados= false;
+		}
+		if(this.catalogoDTO.getValorCatalogo()==null || this.catalogoDTO.getValorCatalogo().equals("")) {
+			JsfUtil.addErrorMessage("Valor no puede estar vacio");
+			datosValidados= false;
+		}
+		if(this.codigoRelacionado!=null && !this.codigoRelacionado.equals("")) {
+			CatalogoDTO catalogoRelacionado=this.catalogoServicio.buscarPorId(codigoRelacionado);
+			if(catalogoRelacionado!=null) {
+				this.catalogoDTO.setCatalogoRelacionado(catalogoRelacionado);
+			}
+		}
+		
+		return datosValidados;
+	}
+
+	public void actualizar() {
     	try {
-    		this.catalogoServicio.actualizar(catalogoDTO);
-    		JsfUtil.addSuccessMessage("CatalogoValor actaulizado correctamente");
+    		if(this.validarRegistro()) {
+    			this.catalogoServicio.actualizar(catalogoDTO);
+    			this.inicializar();
+    			JsfUtil.addSuccessMessage("CatalogoValor actaulizado correctamente");
+    		}
+    		
     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo actualizar el catalogoValor");
@@ -79,24 +106,36 @@ public class CatalogoController implements Serializable{
 
     public void eliminar() {
     	try {
-    		this.catalogoServicio.eliminar(catalogoDTO);
-    		JsfUtil.addSuccessMessage("CatalogoValorDTO eliminado correctamente");
+    		if(this.validarRegistro()) {
+    			String nombreCatalogo = catalogoDTO.getId();
+        		this.catalogoServicio.eliminar(catalogoDTO);
+        		this.inicializar();
+        		JsfUtil.addSuccessMessage("Catalogo "+nombreCatalogo+ " eliminado correctamente");
+    		}
     	}catch (Exception e) {
     		e.printStackTrace();
-			JsfUtil.addErrorMessage("No se pudo elminar el catalogoValor");
+			JsfUtil.addErrorMessage("El catálogo " +this.catalogoDTO.getId()+ 
+					" no se puede eliminar hasta que se hayan eliminado todas sus relaciones");
 		}
     }
 
     public void listarTodos() {
     	try {
     		listaCatalogos = this.catalogoServicio.listarTodos();
-    		JsfUtil.addSuccessMessage("CatalogoValorDTO eliminado correctamente");
     	}catch (Exception e) {
     		e.printStackTrace();
-			JsfUtil.addErrorMessage("No se pudo elminar el catalogoValor");
+			JsfUtil.addErrorMessage("No se puede encontrar los catalogos");
 		}
     }
-	
+
+    public void seleccionar() {
+    	this.catalogoDTO = this.catalogoDTOSelected;
+    	if(this.catalogoDTOSelected.getCatalogoRelacionado()!=null) {
+    		this.codigoRelacionado=this.catalogoDTOSelected.getCatalogoRelacionado().getId();
+    	}
+    	
+    }
+    
 	/**
 	 * @return the catalogoDTO
 	 */
