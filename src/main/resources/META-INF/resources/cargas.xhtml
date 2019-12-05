@@ -8,32 +8,28 @@
     
    <!-- Aqui se define la pagina -->
     <ui:define name="body">
+		<h:form>  
+		<h3 style="margin-top: 0px">Cargar datos de alicuotas por departamento</h3>
+		   <p:fileUpload fileUploadListener="#{cargasController.handleFileUpload}" mode="advanced" dragDropSupport="true"
+		                  sizeLimit="10000000"  allowTypes="/(\.|\/)(csv)$/" 
+		                  cancelLabel="Cancelar" invalidFileMessage="El archivo debe estar en formato .csv " 
+		                  invalidSizeMessage="El tamaño máximo es 10Mb" uploadLabel="Cargar" label="Seleccionar" 
+		                   />
+		<h3>Cargar datos para un nuevo año</h3>
+			<p:panelGrid layout="grid" columns="5" style="width:49%; " >
+				<p:outputLabel value="Valor alicuota " for="alicuota" style="margin-top:3px"/>
+				<p:inputText id="alicuota" value="#{cargasController.valorAlicuota}" size="5" maxlength="5" type="integer"/>
+				<p:outputLabel value="Año" for="anio" style="margin-top:3px"/>
+				<p:selectOneMenu id="anio"
+					value="#{cargasController.anio}">
+					<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
+					<f:selectItems value="#{cargasController.catalogosAnio}"
+						var="items" itemLabel="#{items.nombreCatalogo}"
+						itemValue="#{items.id}"></f:selectItems>
+				</p:selectOneMenu>
+				<p:commandButton value="Cargar nuevo año" actionListener="#{cargasController.nuevoAnio}" />
+			</p:panelGrid>
+		</h:form>		
 		
-		 <h:form>
-           <h:panelGroup id="display">
-               <p:panelGrid columns="4" >
-                   <p:outputLabel value="ID" for="id" />
-                   <p:inputText id="id" value="#{catalogoController.catalogoDTO.id}" disabled="false" />
-                   <p:outputLabel value="Descripción " for="nombre" />
-                   <p:inputText id="nombre" value="#{catalogoController.catalogoDTO.nombreCatalogo}"/>
-                   <p:outputLabel value="Valor " for="valor" />
-                   <p:inputText id="valor" value="#{catalogoController.catalogoDTO.valorCatalogo}"/>
-                   <p:outputLabel value="Código relacionado" for="relacionado" />
-                   <p:selectOneMenu id="relacionado" value="#{catalogoController.codigoRelacionado}" >
-                   	<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
-                   	<f:selectItems value="#{catalogoController.listaCatalogos}" 
-                   		var="items" itemLabel="#{items.nombreCatalogo}" itemValue="#{items.id}"></f:selectItems>
-                   </p:selectOneMenu>
-                   <p:outputLabel value="Estado" for="estado" />
-                   <p:selectOneMenu id="estado" value="#{catalogoController.catalogoDTO.estado}" >
-                   	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
-                   </p:selectOneMenu>
-               </p:panelGrid>
-               <p:commandButton value="Nuevo" />
-               <p:commandButton actionListener="#{catalogoController.registrar}" value="Guardar" />
-               <p:commandButton value="Eliminar" />
-               <p:commandButton value="Cancelar" />
-           </h:panelGroup>
-       </h:form>
     </ui:define>
 </ui:composition>

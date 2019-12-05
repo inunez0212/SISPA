@@ -39,6 +39,17 @@ public interface ICatalogoServicio {
 	 */
 	void eliminar(CatalogoDTO catalogo);
 	
+	
+	/**
+	 * @param id
+	 * @return
+	 */
 	CatalogoDTO buscarPorId(String id);
+
+	/**
+	 * @param idRelacionado
+	 * @return
+	 */
+	List<CatalogoDTO> buscarPorRelacionado(String idRelacionado);
 
 }

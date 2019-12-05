@@ -26,6 +26,13 @@ public interface ICatalogoDAO  extends JpaRepository<CatalogoDTO, Long>{
 	public List<CatalogoDTO> findByEstado(String estado);
 	
 	/**
+	 * Buscar entidad por relacionado
+	 * @param estado
+	 * @return
+	 */
+	List<CatalogoDTO> findByCatalogoRelacionado(CatalogoDTO relacionado);
+	
+	/**
 	 * Eliminar entidad
 	 */
 	@Transactional
@@ -53,4 +60,5 @@ public interface ICatalogoDAO  extends JpaRepository<CatalogoDTO, Long>{
 	@Transactional
 	CatalogoDTO save(CatalogoDTO entity);
 
+	
 }

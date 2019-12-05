@@ -36,19 +36,19 @@
 				<p:panelGrid columns="6" layout="grid">
 					<p:outputLabel value="ID" for="id" />
 					<p:inputText id="id" value="#{catalogoController.catalogoDTO.id}"
-						disabled="false" style="width:99%" />
+						disabled="false" style="width:99%" maxlength="5"/>
 					<p:outputLabel value="Descripción " for="nombre" />
 					<p:inputText id="nombre" style="width:99%"
 						value="#{catalogoController.catalogoDTO.nombreCatalogo}" />
 					<p:outputLabel value="Valor " for="valor" />
-					<p:inputText id="valor" style="width:99%"
+					<p:inputText id="valor" style="width:99%" maxlength="5"
 						value="#{catalogoController.catalogoDTO.valorCatalogo}" />
 					<p:outputLabel value="Código relacionado" for="relacionado" />
 					<p:selectOneMenu id="relacionado"
 						value="#{catalogoController.codigoRelacionado}">
 						<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
 						<f:selectItems value="#{catalogoController.listaCatalogos}"
-							var="items" itemLabel="#{items.nombreCatalogo}"
+							var="items" itemLabel="#{items.id}"
 							itemValue="#{items.id}"></f:selectItems>
 					</p:selectOneMenu>
 					<p:outputLabel value="Estado" for="estado" />

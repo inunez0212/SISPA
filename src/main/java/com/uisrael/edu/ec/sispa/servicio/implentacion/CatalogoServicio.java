@@ -58,8 +58,21 @@ public class CatalogoServicio implements ICatalogoServicio {
 		this.catalogoDAO.delete(catalogo);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public CatalogoDTO buscarPorId(String id) {
 		return this.catalogoDAO.findById(id);
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<CatalogoDTO> buscarPorRelacionado(String idRelacionado){
+		CatalogoDTO relacionado = new CatalogoDTO();
+		relacionado.setId(idRelacionado);
+		return this.catalogoDAO.findByCatalogoRelacionado(relacionado);
 	}
 }
