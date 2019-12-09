@@ -14,9 +14,9 @@
 		<h:form id="helloworld-form">
 		<h1>Identificarse</h1>
 		
-        <p:inputText id="cedula" value="#{sessionController.cedula}" placeholder= "ID"/>
-        <p:inputText id="contrasenia" value="#{sessionController.contrasenia}" placeholder ="Pass"/>
-        <p:commandButton id="submit" value="Ingresar" class = "login-btn" />
+        <p:inputText id="cedula" value="#{sessionController.usuarioDTO.cedula}" placeholder= "ID"/>
+        <p:inputText id="contrasenia" value="#{sessionController.usuarioDTO.contrasenia}" placeholder ="Pass"/>
+        <p:commandButton id="submit" value="Ingresar" actionListener="#{sessionController.ingresar}" class = "login-btn" />
           
 		</h:form>
 	</div>

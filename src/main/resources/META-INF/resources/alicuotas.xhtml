@@ -11,28 +11,25 @@
 		
 		 <h:form>
            <h:panelGroup id="display">
-               <p:panelGrid columns="4" >
-                   <p:outputLabel value="ID" for="id" />
-                   <p:inputText id="id" value="#{catalogoController.catalogoDTO.id}" disabled="false" />
-                   <p:outputLabel value="Descripción " for="nombre" />
-                   <p:inputText id="nombre" value="#{catalogoController.catalogoDTO.nombreCatalogo}"/>
-                   <p:outputLabel value="Valor " for="valor" />
-                   <p:inputText id="valor" value="#{catalogoController.catalogoDTO.valorCatalogo}"/>
-                   <p:outputLabel value="Código relacionado" for="relacionado" />
-                   <p:selectOneMenu id="relacionado" value="#{catalogoController.codigoRelacionado}" >
-                   	<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
-                   	<f:selectItems value="#{catalogoController.listaCatalogos}" 
-                   		var="items" itemLabel="#{items.nombreCatalogo}" itemValue="#{items.id}"></f:selectItems>
-                   </p:selectOneMenu>
-                   <p:outputLabel value="Estado" for="estado" />
-                   <p:selectOneMenu id="estado" value="#{catalogoController.catalogoDTO.estado}" >
-                   	<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
-                   </p:selectOneMenu>
-               </p:panelGrid>
-               <p:commandButton value="Nuevo" />
-               <p:commandButton actionListener="#{catalogoController.registrar}" value="Guardar" />
-               <p:commandButton value="Eliminar" />
-               <p:commandButton value="Cancelar" />
+               <p:dataTable id="catalogoDT" var="catalogo" value="#{catalogoController.listaCatalogos}"
+				selection="#{catalogoController.catalogoDTOSelected}" rowKey="#{catalogo.id}"
+				scrollable="true" scrollHeight="230" style="font-size: 16px;">
+				<p:ajax event="rowSelectRadio" listener="#{catalogoController.seleccionar}" update="formAlicuotas"></p:ajax>
+				<p:column selectionMode="single"
+					style="width:35px;text-align:center" />
+				<p:column headerText="Id">
+					<h:outputText value="#{catalogo.id}" />
+				</p:column>
+				<p:column headerText="Nombre">
+					<h:outputText value="#{catalogo.nombreCatalogo}" />
+				</p:column>
+				<p:column headerText="Valor">
+					<h:outputText value="#{catalogo.valorCatalogo}" />
+				</p:column>
+				<p:column headerText="Referencia">
+					<h:outputText value="#{catalogo.catalogoRelacionado.id}" />
+				</p:column>
+			</p:dataTable>
            </h:panelGroup>
        </h:form>
     </ui:define>

@@ -75,6 +75,9 @@ public class CatalogoDTO implements Serializable{
 		this.nombreCatalogo = nombreCatalogo;
 	}
 
+	
+
+	
 	/**
 	 * @return the estado
 	 */

@@ -4,15 +4,15 @@
 package com.uisrael.edu.ec.sispa.vista.beans.controlador;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
-import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
+import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
+import com.uisrael.edu.ec.sispa.servicio.interfaces.IUsuarioServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
 /**
@@ -27,50 +27,43 @@ public class SessionController implements Serializable{
 	 */
 	private static final long serialVersionUID = -7106328209673993342L;
 
-	private String cedula;
-	
-	private String contrasenia;
-	private List<CatalogoDTO> listaCatalogos = new ArrayList<>();
-
 	@Autowired
-	private ICatalogoServicio catalogoServicio;
+	private IUsuarioServicio usuarioServicio;
+
+	private UsuarioDTO usuarioDTO;
 	
-	
-	public void obtenerCatalogos() {
+	public void ingresar() {
 		try {
-			listaCatalogos = this.catalogoServicio.listarTodos();
-		}catch(Exception ex) {
-			ex.printStackTrace();
-			JsfUtil.addErrorMessage("Error al obtener catalogos");
+			usuarioDTO = this.usuarioServicio.identificarUsuario(usuarioDTO);
+			if(usuarioDTO!=null) {
+				JsfUtil.addSuccessMessage("Bienvendo "+usuarioDTO.getNombre());
+				FacesContext fContext = FacesContext.getCurrentInstance();
+				ExternalContext extContext = fContext.getExternalContext();
+				extContext.redirect(extContext.getRequestContextPath() + "/catalogo.xhtml");
+			}else {
+				usuarioDTO = new UsuarioDTO();
+				JsfUtil.addErrorMessage("Usuario y/o contraseÃ±a incorrectos");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			JsfUtil.addErrorMessage("Problemas internos con el servicio");
 		}
 	}
+
+	/**
+	 * @return the usuarioDTO
+	 */
+	public UsuarioDTO getUsuarioDTO() {
+		return usuarioDTO;
+	}
+
+	/**
+	 * @param usuarioDTO the usuarioDTO to set
+	 */
+	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+		this.usuarioDTO = usuarioDTO;
+	}
 	
-	/**
-	 * @return the cedula
-	 */
-	public String getCedula() {
-		return cedula;
-	}
-
-	/**
-	 * @param cedula the cedula to set
-	 */
-	public void setCedula(String cedula) {
-		this.cedula = cedula;
-	}
-
-	/**
-	 * @return the contrasenia
-	 */
-	public String getContrasenia() {
-		return contrasenia;
-	}
-
-	/**
-	 * @param contrasenia the contrasenia to set
-	 */
-	public void setContrasenia(String contrasenia) {
-		this.contrasenia = contrasenia;
-	}
+	
 	
 }

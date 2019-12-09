@@ -41,9 +41,7 @@ public class CatalogoController implements Serializable{
 	
 	private String codigoRelacionado;
 	
-	private CatalogoController () {
-		
-	}
+	
 	
 	@PostConstruct
 	public void inicializar() {

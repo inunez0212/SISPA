@@ -50,4 +50,13 @@ public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>
 	@Transactional
 	UsuarioDTO save(UsuarioDTO entity);
 
+	/**
+	 * Buscar usuario
+	 * @param estado
+	 * @param cedula
+	 * @param contrasenia
+	 * @return
+	 */
+	public UsuarioDTO findByEstadoAndCedulaAndContrasenia(
+			String estado, String cedula, String contrasenia);
 }

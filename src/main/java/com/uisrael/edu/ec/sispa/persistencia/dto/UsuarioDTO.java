@@ -34,6 +34,8 @@ public class UsuarioDTO implements Serializable{
 	
 	private String cedula;
 	
+	private String contrasenia;
+	
 	private String nombre;
 	
 	private String apellido;
@@ -191,6 +193,19 @@ public class UsuarioDTO implements Serializable{
 	public void setTipoUsuario(CatalogoDTO tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
-	
+
+	/**
+	 * @return the contrasenia
+	 */
+	public String getContrasenia() {
+		return contrasenia;
+	}
+
+	/**
+	 * @param contrasenia the contrasenia to set
+	 */
+	public void setContrasenia(String contrasenia) {
+		this.contrasenia = contrasenia;
+	}
 	
 }
