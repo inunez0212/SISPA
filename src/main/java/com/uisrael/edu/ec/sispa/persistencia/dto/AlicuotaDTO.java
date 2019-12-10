@@ -49,7 +49,6 @@ public class AlicuotaDTO implements Serializable{
 	@Column(name="valorpagado")
 	private BigDecimal valorPagado;
 	
-	private String telefono1;
 	
 	private String estado;
 	
@@ -144,21 +143,6 @@ public class AlicuotaDTO implements Serializable{
 	public void setValorPagado(BigDecimal valorPagado) {
 		this.valorPagado = valorPagado;
 	}
-
-	/**
-	 * @return the telefono1
-	 */
-	public String getTelefono1() {
-		return telefono1;
-	}
-
-	/**
-	 * @param telefono1 the telefono1 to set
-	 */
-	public void setTelefono1(String telefono1) {
-		this.telefono1 = telefono1;
-	}
-
 	/**
 	 * @return the estado
 	 */

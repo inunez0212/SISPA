@@ -3,9 +3,11 @@
  */
 package com.uisrael.edu.ec.sispa.persistencia.dao.interfaces;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uisrael.edu.ec.sispa.persistencia.dto.AlicuotaDTO;
@@ -50,4 +52,23 @@ public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{
 	 * @return
 	 */
 	@Transactional
-	AlicuotaDTO save(AlicuotaDTO entity);}
+	AlicuotaDTO save(AlicuotaDTO entity);
+
+	/**
+	 * Busca alicuotas por anio
+	 * @param anio
+	 * @return
+	 */
+	List<AlicuotaDTO> findByAnio(String anio);
+
+	/**
+	 * @param anio
+	 * @param usuario
+	 * @param valorAlicuota
+	 */
+	@Transactional
+	@Query("insert into AlicuotaDTO(anio, estado, mes, usuario, valorAlicuota, departamentoDTO) " + 
+			"select ?1, a.estado, a.mes, ?2, ?3, a.departamentoDTO " + 
+			"from AlicuotaDTO a ")
+	void insertNuevoAnio(String anio, String usuario, BigDecimal valorAlicuota);
+}

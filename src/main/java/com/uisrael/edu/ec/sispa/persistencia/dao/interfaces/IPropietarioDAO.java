@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uisrael.edu.ec.sispa.persistencia.dao.implementacion.PropietarioDAO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.FacturaDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.PropietarioDTO;
@@ -51,5 +52,12 @@ public interface IPropietarioDAO extends JpaRepository<PropietarioDTO, Long>{/**
 	@Transactional
 	PropietarioDTO save(PropietarioDTO entity);
 
+	/**
+	 * Buscar por cedula
+	 * @param cedula
+	 * @return
+	 */
+	PropietarioDTO findByCedula(String cedula);
+		
 
 }

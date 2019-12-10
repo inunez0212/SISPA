@@ -50,4 +50,12 @@ public interface IDepartamentoDAO extends JpaRepository<DepartamentoDTO, Long> {
 	@Transactional
 	DepartamentoDTO save(DepartamentoDTO entity);
 
+	/**
+	 * Obtiene un departamento por numero y bloque
+	 * @param bloque
+	 * @param numero
+	 * @return
+	 */
+	DepartamentoDTO findByBloqueAndNumero(String bloque, String numero);
+	
 }

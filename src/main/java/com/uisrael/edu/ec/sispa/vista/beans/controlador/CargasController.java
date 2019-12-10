@@ -3,7 +3,9 @@
  */
 package com.uisrael.edu.ec.sispa.vista.beans.controlador;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.sispa.constantes.Constantes;
 import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
+import com.uisrael.edu.ec.sispa.servicio.interfaces.IAlicuotaServicio;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
@@ -32,6 +35,12 @@ public class CargasController implements Serializable{
 	@Autowired
 	private ICatalogoServicio catalogoServicio;
 	
+	@Autowired
+	private IAlicuotaServicio alicuotasServicio;
+	
+	@Autowired
+	private SessionController sessionController;
+		
 	private String anio;
 	
 	private Integer valorAlicuota;
@@ -43,12 +52,31 @@ public class CargasController implements Serializable{
 		catalogosAnio = this.catalogoServicio.buscarPorRelacionado(Constantes.ANIO_CARGA);
 	}
 	
+	/**
+	 * Maneja el archivo cargado
+	 */
     public void handleFileUpload(FileUploadEvent event) {
-        JsfUtil.addSuccessMessage( event.getFile().getFileName() + " is uploaded.");
+    	try {
+    		this.alicuotasServicio.cargarDatos(event.getFile().getContents());
+    		JsfUtil.addSuccessMessage("Archivo cargado correctamente");
+    	}catch (IOException ioe) {
+    		JsfUtil.addErrorMessage("Error en el archivo"+ ioe.getMessage());
+    	}catch(Exception e) {
+    		JsfUtil.addErrorMessage("Error en el archivo"+ event.getFile().getFileName());
+    	}
     }
     
     public void nuevoAnio() {
-    	JsfUtil.addSuccessMessage("Datos para el año " +this.anio+" cargados correctamente" );
+    	try {
+    		if(valorAlicuota==null || anio==null) {
+    			
+    		}
+    		this.alicuotasServicio.generarNuevoAnio(this.anio, this.sessionController.getNombreUsuarioLogueado(),
+    				BigDecimal.valueOf(this.valorAlicuota));
+    		JsfUtil.addSuccessMessage("Datos para el año " +this.anio+" cargados correctamente" );
+    	}catch (Exception ioe) {
+    		JsfUtil.addErrorMessage("Error, "+ ioe.getMessage());
+    	}
     }
 
 	/**

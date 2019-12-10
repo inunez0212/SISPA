@@ -33,6 +33,10 @@ public class CatalogoController implements Serializable{
 	@Autowired
 	private SessionController sessionController;
 	
+	@Autowired
+	private CargasController cargasController;
+	
+	
 	private CatalogoDTO catalogoDTO;
 	
 	private CatalogoDTO catalogoDTOSelected;
@@ -49,6 +53,7 @@ public class CatalogoController implements Serializable{
 		this.catalogoDTO = new CatalogoDTO();
 		this.catalogoDTOSelected=null;
 		this.codigoRelacionado ="";
+		this.cargasController.inicializar();
 	}
 	
 	public void registrar() {

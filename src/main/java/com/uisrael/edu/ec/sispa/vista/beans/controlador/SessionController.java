@@ -63,6 +63,14 @@ public class SessionController implements Serializable{
 	public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
 		this.usuarioDTO = usuarioDTO;
 	}
+
+	public String getNombreUsuarioLogueado() {
+		String nombre ="";
+		if(this.usuarioDTO!=null) {
+			nombre=this.usuarioDTO.getNombre() +" "+this.getUsuarioDTO().getApellido();
+		}
+		return nombre;
+	}
 	
 	
 	

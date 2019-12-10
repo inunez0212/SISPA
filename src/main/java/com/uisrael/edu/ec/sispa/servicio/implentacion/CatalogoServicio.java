@@ -25,7 +25,7 @@ public class CatalogoServicio implements ICatalogoServicio {
 	 */
 	@Autowired
 	private ICatalogoDAO catalogoDAO;
-	
+
 	/**
 	 * {@inheritDoc}
 	 */
