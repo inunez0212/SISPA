@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,6 +68,7 @@ public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{
 	 * @param valorAlicuota
 	 */
 	@Transactional
+	@Modifying
 	@Query("insert into AlicuotaDTO(anio, estado, mes, usuario, valorAlicuota, departamentoDTO) " + 
 			"select ?1, a.estado, a.mes, ?2, ?3, a.departamentoDTO " + 
 			"from AlicuotaDTO a ")
