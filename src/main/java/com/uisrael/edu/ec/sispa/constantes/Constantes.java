@@ -19,5 +19,7 @@ public final class Constantes {
 	public static final int ARCHIVO_POSICION_VALOR = 11;
 	public static final int ARCHIVO_POSICION_PAGO = 12;
 	public static final int ARCHIVO_POSICION_FECHA = 13;
+	public static final String ESTADO_PENDIENTE = "PENDIENTE";
+	public static final String ESTADO_PAGADO = "PAGADO";
 	
 }

@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -172,5 +173,22 @@ public class AlicuotaServicio implements IAlicuotaServicio{
 		}else {
 			throw new Exception("Ya existen datos creados para el "+ anio);
 		}
+	}
+
+	/**
+	 * {inheritDoc}
+	 */
+	@Override
+	public List<DepartamentoDTO> buscarDepartamentosActivos() {
+		return this.alicuotaDAO.buscarDepartamentosActivos(Constantes.ESTADO_ACTIVO);
+	}
+
+
+	/**
+	 * {inheritDoc}
+	 */
+	@Override
+	public Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento) {
+		return this.alicuotaDAO.findByDepartamentoDTO(departamento);
 	}
 }

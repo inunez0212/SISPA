@@ -1,36 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:p="http://primefaces.org/ui"
-                xmlns:f="http://java.sun.com/jsf/core"
-                template="/admin.xhtml">
-    
-   <!-- Aqui se define la pagina -->
-    <ui:define name="body">
-		
-		 <h:form>
-           <h:panelGroup id="display">
-               <p:dataTable id="catalogoDT" var="catalogo" value="#{catalogoController.listaCatalogos}"
-				selection="#{catalogoController.catalogoDTOSelected}" rowKey="#{catalogo.id}"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" template="/admin.xhtml">
+
+	<!-- Aqui se define la pagina -->
+	<ui:define name="body">
+		<h:form>
+			<p:dataTable id="alicuotaDT" var="a"
+				value="#{alicuotaController.departamentoDTOList}" 
 				scrollable="true" scrollHeight="230" style="font-size: 16px;">
-				<p:ajax event="rowSelectRadio" listener="#{catalogoController.seleccionar}" update="formAlicuotas"></p:ajax>
-				<p:column selectionMode="single"
-					style="width:35px;text-align:center" />
-				<p:column headerText="Id">
-					<h:outputText value="#{catalogo.id}" />
+				<p:column style="width:70px;text-align: center">
+					<p:commandButton update="alicuotaDT"
+						oncomplete="PF('alicuotaDialog').show()" icon="fa fa-search"
+						title="View">
+						<f:setPropertyActionListener value="#{a}"
+							target="#{alicuotaController.departamentoSelectedDTO}" />
+					</p:commandButton>
+					<p:commandButton update="alicuotaDT"
+						oncomplete="PF('alicuotaDialog').show()" icon="fa fa-credit-card"
+						title="View">
+						<f:setPropertyActionListener value="#{a}"
+							target="#{alicuotaController.departamentoSelectedDTO}" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="ID">
+					<h:outputText value="#{a.propietarioDTO.cedula}" />
 				</p:column>
 				<p:column headerText="Nombre">
-					<h:outputText value="#{catalogo.nombreCatalogo}" />
+					<h:outputText value="#{a.propietarioDTO.nombre}" />
 				</p:column>
-				<p:column headerText="Valor">
-					<h:outputText value="#{catalogo.valorCatalogo}" />
+				<p:column headerText="Apellido">
+					<h:outputText value="#{a.propietarioDTO.apellido}" />
 				</p:column>
-				<p:column headerText="Referencia">
-					<h:outputText value="#{catalogo.catalogoRelacionado.id}" />
+				<p:column headerText="Bloque">
+					<h:outputText value="#{a.bloque}" />
+				</p:column>
+				<p:column headerText="Número">
+					<h:outputText value="#{a.numero}" />
+				</p:column>
+				<p:column headerText="Estado">
+					<h:outputText value="#{alicuotaController.verificarPago(a.id)}" />
 				</p:column>
 			</p:dataTable>
-           </h:panelGroup>
-       </h:form>
-    </ui:define>
+
+			<p:dialog header="Departamento #{alicuotaController.departamentoSelectedDTO.bloque}-#{alicuotaController.departamentoSelectedDTO.numero}" widgetVar="alicuotaDialog"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="alicuotaDetail" style="text-align:center;">
+					<p:dataList value="#{alicuotaController.departamentoSelectedDTO.alicuotasCOL}" var="alicuota"
+						type="unordered" itemType="none" paginator="true" rows="10"
+						styleClass="paginated">
+						<f:facet name="header">
+				            Alicuotas
+        				</f:facet>
+						<h:outputText value= "#{alicuota.anio} #{alicuota.mes} #{alicuota.valorAlicuota} #{alicuota.valorPagado} #{alicuota.fechaPago}" 
+							style="display:inline-block" />
+					</p:dataList>
+
+				</p:outputPanel>
+			</p:dialog>
+		</h:form>
+	</ui:define>
 </ui:composition>
