@@ -15,6 +15,7 @@ import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IUsuarioServicio;
+import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
 /**
  * @author Ivan
@@ -42,8 +43,33 @@ public class UsuarioController implements Serializable{
 	
 	private String perfil;
 	
+	@PostConstruct
+	public void inicializar() {
+		this.listaUsuarios = this.usuarioServicio.listarTodos();
+		this.usuarioDTO = new UsuarioDTO();
+		this.usuarioDTOSelected=null;
+		this.perfil ="";
+	}
+	
+	public void registrar() {
+    	try {
+    		if(this.validarRegistro()) {
+    			this.usuarioServicio.registrar(usuarioDTO);
+    			inicializar();
+    			JsfUtil.addSuccessMessage("Usuario creado correctamente");
+    		}
+    	}catch (Exception e) {
+    		e.printStackTrace();
+			JsfUtil.addErrorMessage("No se pudo crear el Usuario");
+		}
+    }
+	
 	
 
+	private boolean validarRegistro() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	/**
 	 * @return the sessionController
 	 */

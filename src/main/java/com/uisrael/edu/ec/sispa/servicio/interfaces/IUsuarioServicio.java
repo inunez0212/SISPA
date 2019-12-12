@@ -3,6 +3,8 @@
  */
 package com.uisrael.edu.ec.sispa.servicio.interfaces;
 
+import java.util.List;
+
 import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
 
 /**
@@ -18,6 +20,10 @@ public interface IUsuarioServicio {
 	 * @return
 	 */
 	UsuarioDTO identificarUsuario(UsuarioDTO usuarioDTO);
+
+	List<UsuarioDTO> listarTodos();
+
+	void registrar(UsuarioDTO usuarioDTO);
 
 	
 

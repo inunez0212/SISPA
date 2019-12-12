@@ -9,15 +9,31 @@
    <!-- Aqui se define la pagina -->
     <ui:define name="body">
 		
-		 <h:form>
+		 <h:form id="formUsuarios">
            <h:panelGroup id="display">
+            <p:panel style="width: 80%; margin: 0px auto;">
                <p:panelGrid columns="4" >
+               		<p:outputLabel value="ID" for="id" />
+					<p:inputText id="id" value="#{usuarioController.usuarioDTO.cedula}"
+						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Contraseña" for="contrasenia" />
+					<p:inputText id="contrasenia" value="#{usuarioController.usuarioDTO.contrasenia}"
+						disabled="false"  style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Nombre" for="nombre" />
+					<p:inputText id="nombre" value="#{usuarioController.usuarioDTO.nombre}"
+						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Apellido" for="apellido" />
+					<p:inputText id="apellido" value="#{usuarioController.usuarioDTO.apellido}"
+						disabled="false" style="width:99%" maxlength="5"/>
                   
                </p:panelGrid>
-               <p:commandButton value="Nuevo" />
-               <p:commandButton actionListener="#{catalogoController.registrar}" value="Guardar" />
+              <p:panelGrid columns="4" style="width: 50%; margin: 0px auto;" layout="grid">
+               <p:commandButton value="Nuevo" actionListener="#{usuarioController.inicializar}" update="formUsuarios"/>
+               <p:commandButton value="Guardar" actionListener="#{usuarioController.registrar}"  update="formAlicuotas"/>
                <p:commandButton value="Eliminar" />
                <p:commandButton value="Cancelar" />
+              </p:panelGrid>
+            </p:panel>
            </h:panelGroup>
        </h:form>
     </ui:define>

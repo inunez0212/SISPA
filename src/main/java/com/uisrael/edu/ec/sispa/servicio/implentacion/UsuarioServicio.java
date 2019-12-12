@@ -3,6 +3,8 @@
  */
 package com.uisrael.edu.ec.sispa.servicio.implentacion;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,18 @@ public class UsuarioServicio implements IUsuarioServicio{
 		
 		return this.usuarioDAO.findByEstadoAndCedulaAndContrasenia(
 				Constantes.ESTADO_ACTIVO, usuarioDTO.getCedula(), usuarioDTO.getContrasenia());
+	}
+
+	@Override
+	public List<UsuarioDTO> listarTodos() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void registrar(UsuarioDTO usuarioDTO) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
