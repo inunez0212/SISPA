@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,6 +23,8 @@ import com.uisrael.edu.ec.sispa.persistencia.dto.AlicuotaDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.DepartamentoDTO;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IAlicuotaServicio;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
+import com.uisrael.edu.ec.sispa.servicio.interfaces.IDepartamentoServicio;
+import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
 /**
  * @author kali
@@ -43,8 +46,11 @@ public class AlicuotaController implements Serializable{
 	
 	@Autowired
 	private SessionController sessionController;
-		
-	private String anio;
+
+	@Autowired
+	private IDepartamentoServicio departamentoServicio;
+	
+	private Integer idAlicuotaPago;
 	
 	private BigDecimal valorPago;
 	
@@ -62,6 +68,7 @@ public class AlicuotaController implements Serializable{
 		departamentoSelectedDTO=new DepartamentoDTO();
 		alicuotasDTOList = new ArrayList<>();
 		alicuotaSelectedDTO = new AlicuotaDTO();
+		valorPago=BigDecimal.ZERO;
 	}
 
 	/**
@@ -69,7 +76,7 @@ public class AlicuotaController implements Serializable{
 	 * @param idDepartamento
 	 */
 	public String verificarPago(Integer idDepartamento) {
-		String estado = estado = Constantes.ESTADO_PENDIENTE;
+		String estado =  Constantes.ESTADO_PENDIENTE;
 		DepartamentoDTO departamento = this.departamentoDTOList.stream().
 				filter(dato -> dato.getId().equals(idDepartamento)).findAny().orElse(null);
 		if(departamento !=null ) {
@@ -88,7 +95,45 @@ public class AlicuotaController implements Serializable{
 		return estado;
 	}
 	
+
+	public List<AlicuotaDTO> alicuotasPendientes(Integer idDepartamento){
+		DepartamentoDTO departamento = this.departamentoServicio.findById(idDepartamento);
+		return this.alicuotaServicio.findByDepartamentoDTOAndValorPagadoIsNull(departamento);
+	}
 	
+	public void guardar() {
+    	try {
+    		if(this.validarRegistro()) {
+    			alicuotaSelectedDTO.setFechaPago(new Date());
+    			alicuotaSelectedDTO.setUsuario(this.sessionController.getNombreUsuarioLogueado());
+    			this.alicuotaServicio.actualizarAlicuota(alicuotaSelectedDTO);
+    			inicializar();
+    			JsfUtil.addSuccessMessage("Pago guardado correctamente");
+    		}else {
+    			JsfUtil.addErrorMessage("No se encontró el registro para actualizar");
+    		}
+    	}catch (Exception e) {
+    		e.printStackTrace();
+			JsfUtil.addErrorMessage("No se pudo guardar el pago de la alicuota");
+		}
+    }
+
+	public void seleccionarAlicuota() {
+		this.alicuotaSelectedDTO = this.alicuotaServicio.findById(this.idAlicuotaPago);
+	}
+	
+	private boolean validarRegistro() {
+		boolean estadoRegistro = true;
+		if(alicuotaSelectedDTO == null) {
+			estadoRegistro = false;
+		}
+		if(valorPago==null || valorPago.compareTo(BigDecimal.ONE)< 0) {
+			estadoRegistro = false;
+			JsfUtil.addErrorMessage("El valor del pago debe ser mayor a 1");
+		}
+		return estadoRegistro;
+	}
+
 	/**
 	 * @return the sessionController
 	 */
@@ -103,19 +148,6 @@ public class AlicuotaController implements Serializable{
 		this.sessionController = sessionController;
 	}
 
-	/**
-	 * @return the anio
-	 */
-	public String getAnio() {
-		return anio;
-	}
-
-	/**
-	 * @param anio the anio to set
-	 */
-	public void setAnio(String anio) {
-		this.anio = anio;
-	}
 
 	/**
 	 * @return the valorPago
@@ -186,5 +218,20 @@ public class AlicuotaController implements Serializable{
 	public void setAlicuotaSelectedDTO(AlicuotaDTO alicuotaSelectedDTO) {
 		this.alicuotaSelectedDTO = alicuotaSelectedDTO;
 	}
+
+	/**
+	 * @return the idAlicuotaPago
+	 */
+	public Integer getIdAlicuotaPago() {
+		return idAlicuotaPago;
+	}
+
+	/**
+	 * @param idAlicuotaPago the idAlicuotaPago to set
+	 */
+	public void setIdAlicuotaPago(Integer idAlicuotaPago) {
+		this.idAlicuotaPago = idAlicuotaPago;
+	}
+
 	
 }

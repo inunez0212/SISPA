@@ -191,4 +191,30 @@ public class AlicuotaServicio implements IAlicuotaServicio{
 	public Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento) {
 		return this.alicuotaDAO.findByDepartamentoDTO(departamento);
 	}
+
+	/**
+	 * {inheritDoc}
+	 */
+	@Override
+	public List<AlicuotaDTO> findByDepartamentoDTOAndValorPagadoIsNull(DepartamentoDTO departamento) {
+		return this.alicuotaDAO.findByDepartamentoDTOAndValorPagadoIsNull(departamento);
+	}
+
+	/**
+	 * {inheritDoc}
+	 */
+	@Override
+	public AlicuotaDTO actualizarAlicuota(AlicuotaDTO alicuota) {
+		return this.alicuotaDAO.save(alicuota);
+	}
+
+	/**
+	 * {inheritDoc}
+	 */
+	@Override
+	public AlicuotaDTO findById(Integer idAlicuotaPago) {
+		return this.alicuotaDAO.findById(idAlicuotaPago);
+	}
+	
+	
 }

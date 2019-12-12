@@ -7,25 +7,24 @@
 
 	<!-- Aqui se define la pagina -->
 	<ui:define name="body">
-		<h:form>
+		<h:form id="alicuotaForm">
 			<p:dataTable id="alicuotaDT" var="a"
-				value="#{alicuotaController.departamentoDTOList}" 
+				value="#{alicuotaController.departamentoDTOList}" rowKey="#{a.id}"
 				scrollable="true" scrollHeight="230" style="font-size: 16px;">
 				<p:column style="width:70px;text-align: center">
-					<p:commandButton update="alicuotaDT"
+					<p:commandButton update="alicuotaForm"
 						oncomplete="PF('alicuotaDialog').show()" icon="fa fa-search"
 						title="View">
 						<f:setPropertyActionListener value="#{a}"
 							target="#{alicuotaController.departamentoSelectedDTO}" />
 					</p:commandButton>
-					<p:commandButton update="alicuotaDT"
-						oncomplete="PF('alicuotaDialog').show()" icon="fa fa-credit-card"
+					<p:commandButton update="alicuotaForm"
+						oncomplete="PF('pagoDialog').show()" icon="fa fa-credit-card"
 						title="View">
 						<f:setPropertyActionListener value="#{a}"
 							target="#{alicuotaController.departamentoSelectedDTO}" />
 					</p:commandButton>
 				</p:column>
-
 				<p:column headerText="ID">
 					<h:outputText value="#{a.propietarioDTO.cedula}" />
 				</p:column>
@@ -46,21 +45,63 @@
 				</p:column>
 			</p:dataTable>
 
-			<p:dialog header="Departamento #{alicuotaController.departamentoSelectedDTO.bloque}-#{alicuotaController.departamentoSelectedDTO.numero}" widgetVar="alicuotaDialog"
+			<p:dialog header="Departamento #{alicuotaController.departamentoSelectedDTO.bloque}-#{alicuotaController.departamentoSelectedDTO.numero}" widgetVar="alicuotaDialog" height="60%" width="50%"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
-				<p:outputPanel id="alicuotaDetail" style="text-align:center;">
-					<p:dataList value="#{alicuotaController.departamentoSelectedDTO.alicuotasCOL}" var="alicuota"
-						type="unordered" itemType="none" paginator="true" rows="10"
+				<p:outputPanel id="alicuotaDetail" style="text-align:center;" >
+					<p:dataTable value="#{alicuotaController.departamentoSelectedDTO.alicuotasCOL}" var="alicuota"
+						rowKey="#{alicuota.id}" paginator="true" rows="6" 
 						styleClass="paginated">
 						<f:facet name="header">
-				            Alicuotas
+				             Propietario: #{alicuotaController.departamentoSelectedDTO.propietarioDTO.nombre} #{alicuotaController.departamentoSelectedDTO.propietarioDTO.apellido}
         				</f:facet>
-						<h:outputText value= "#{alicuota.anio} #{alicuota.mes} #{alicuota.valorAlicuota} #{alicuota.valorPagado} #{alicuota.fechaPago}" 
-							style="display:inline-block" />
-					</p:dataList>
+        				<p:column headerText="Año">
+        					<h:outputText value="#{alicuota.anio}"/>
+        				</p:column>
+        				<p:column headerText="Mes">
+        					<h:outputText value="#{alicuota.mes}"/>
+        				</p:column>
+        				<p:column headerText="Alicuota">
+        					<h:outputText value="#{alicuota.valorAlicuota}"/>
+        				</p:column>
+        				<p:column headerText="Pago">
+        					<h:outputText value="#{alicuota.valorPagado}"/>
+        				</p:column>
+        				<p:column headerText="Fecha">
+        					<h:outputText value="#{alicuota.fechaPago}">
+        						<f:convertDateTime pattern="yyyy-MM-dd" />
+        					</h:outputText>
+        				</p:column>
+        				<p:column headerText="Usuario">
+        					<h:outputText value="#{alicuota.usuario}"/>
+        				</p:column>
+					</p:dataTable>
 
 				</p:outputPanel>
 			</p:dialog>
+			<p:dialog header="Departamento #{alicuotaController.departamentoSelectedDTO.bloque}-#{alicuotaController.departamentoSelectedDTO.numero}" widgetVar="pagoDialog" height="60%" width="30%"
+				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+				<p:outputPanel id="pagoDetail" style="text-align:center;">
+		            <h3> Propietario: #{alicuotaController.departamentoSelectedDTO.propietarioDTO.nombre} #{alicuotaController.departamentoSelectedDTO.propietarioDTO.apellido}</h3>
+					<p:panelGrid layout="grid" columns="2">
+						<p:outputLabel value="Alicuota" for="relacionado" />
+						<p:selectOneMenu id="relacionado" 
+							value="#{alicuotaController.idAlicuotaPago}">
+							<p:ajax listener="#{alicuotaController.seleccionarAlicuota}" update="valAli"></p:ajax>
+							<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
+							<f:selectItems value="#{alicuotaController.alicuotasPendientes(alicuotaController.departamentoSelectedDTO.id)}"
+								var="items" itemLabel="#{items.anio} #{items.mes}" 
+								itemValue="#{items.id}"></f:selectItems>
+						</p:selectOneMenu>
+						<p:outputLabel value="Alicuota" />
+						<p:outputLabel value="#{alicuotaController.alicuotaSelectedDTO.valorAlicuota}" id="valAli"/>
+						<p:outputLabel value="Pago" for="pago" />
+						<p:inputText id="pago" style="width:99%" maxlength="7"
+							value="#{alicuotaController.valorPago}" />
+						<p:commandButton value="Guardar" actionListener="#{alicuotaController.guardar}" update="alicuotaForm" oncomplete="PF('pagoDialog').hide()"/>
+					</p:panelGrid>		            
+				</p:outputPanel>
+			</p:dialog>
+			
 		</h:form>
 	</ui:define>
 </ui:composition>

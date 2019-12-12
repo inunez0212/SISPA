@@ -33,7 +33,7 @@ public interface IDepartamentoDAO extends JpaRepository<DepartamentoDTO, Long> {
 	 * @param id
 	 * @return
 	 */
-	DepartamentoDTO getOne(Long id);
+	DepartamentoDTO findById(Integer id);
 	
 	/**
 	 * Contar por estado

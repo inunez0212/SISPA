@@ -41,4 +41,24 @@ public interface IAlicuotaServicio {
 	 */
 	Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento);
 
+	/**
+	 * Busca alicuotas pendientes por departamento
+	 * @param departamento
+	 * @return
+	 */
+	List<AlicuotaDTO> findByDepartamentoDTOAndValorPagadoIsNull(DepartamentoDTO departamento);
+
+	/**
+	 * Actualiza la alicuota
+	 * @param alicuota
+	 * @return
+	 */
+	AlicuotaDTO actualizarAlicuota(AlicuotaDTO alicuota);
+
+	/**
+	 * Busca alicuota por ID
+	 * @param idAlicuotaPago
+	 * @return
+	 */
+	AlicuotaDTO findById(Integer idAlicuotaPago);
 }

@@ -39,7 +39,7 @@ public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{
 	 * @param id
 	 * @return
 	 */
-	AlicuotaDTO getOne(Long id);
+	AlicuotaDTO findById(Integer id);
 	
 	/**
 	 * Contar por estado
@@ -90,4 +90,11 @@ public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{
 	 * @return
 	 */
 	public Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento);
+
+	/**
+	 * 
+	 * @param departamento
+	 * @return
+	 */
+	public List<AlicuotaDTO> findByDepartamentoDTOAndValorPagadoIsNull(DepartamentoDTO departamento);
 }
