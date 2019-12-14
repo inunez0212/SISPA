@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.uisrael.edu.ec.sispa.constantes.Constantes;
 import com.uisrael.edu.ec.sispa.persistencia.dao.interfaces.IUsuarioDAO;
+import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IUsuarioServicio;
 
@@ -34,15 +35,30 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 
 	@Override
+	public void registrar(UsuarioDTO usuario) {
+		 usuarioDAO.save(usuario);
+	}
+	
+	@Override
+	public UsuarioDTO actualizar(UsuarioDTO usuario) {
+		return usuarioDAO.save(usuario);
+	}
+	@Override
 	public List<UsuarioDTO> listarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.usuarioDAO.findByEstado(Constantes.ESTADO_ACTIVO);
+	}
+	
+	@Override
+	public void eliminar(UsuarioDTO usuario) {
+		this.usuarioDAO.delete(usuario);
+	}
+	
+	@Override
+	public UsuarioDTO buscarPorId(Integer id) {
+		return this.usuarioDAO.findById(id);
 	}
 
-	@Override
-	public void registrar(UsuarioDTO usuarioDTO) {
-		// TODO Auto-generated method stub
-		
-	}
+	
+	
 	
 }

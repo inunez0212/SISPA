@@ -62,10 +62,10 @@ public class UsuarioDTO implements Serializable{
 	}
 
 	/**
-	 * @param id the id to set
+	 * @param idRelacionado the id to set
 	 */
-	public void setId(Integer id) {
-		this.id = id;
+	public void setId(Integer idRelacionado) {
+		this.id = idRelacionado;
 	}
 
 	/**

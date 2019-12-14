@@ -25,6 +25,14 @@ public interface IUsuarioServicio {
 
 	void registrar(UsuarioDTO usuarioDTO);
 
+	UsuarioDTO actualizar(UsuarioDTO usuario);
+
+	void eliminar(UsuarioDTO usuario);
+
+	UsuarioDTO buscarPorId(Integer id);
+
+	
+
 	
 
 }

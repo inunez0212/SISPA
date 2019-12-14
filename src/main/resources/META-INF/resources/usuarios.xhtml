@@ -25,16 +25,55 @@
 					<p:outputLabel value="Apellido" for="apellido" />
 					<p:inputText id="apellido" value="#{usuarioController.usuarioDTO.apellido}"
 						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Cargo" for="cargo" />
+					<p:inputText id="cargo" value="#{usuarioController.usuarioDTO.cargo}"
+						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Direccion" for="direccion" />
+					<p:inputText id="direccion" value="#{usuarioController.usuarioDTO.direccion}"
+						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Telefono1" for="telefono1" />
+					<p:inputText id="telefono1" value="#{usuarioController.usuarioDTO.telefono1}"
+						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Telefono2" for="telefono2" />
+					<p:inputText id="telefono2" value="#{usuarioController.usuarioDTO.telefono2}"
+						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Estado" for="estado" />
+					<p:inputText id="estado" value="#{usuarioController.usuarioDTO.estado}"
+						disabled="false" style="width:99%" maxlength="5"/>
+						
                   
                </p:panelGrid>
               <p:panelGrid columns="4" style="width: 50%; margin: 0px auto;" layout="grid">
                <p:commandButton value="Nuevo" actionListener="#{usuarioController.inicializar}" update="formUsuarios"/>
-               <p:commandButton value="Guardar" actionListener="#{usuarioController.registrar}"  update="formAlicuotas"/>
-               <p:commandButton value="Eliminar" />
-               <p:commandButton value="Cancelar" />
+               <p:commandButton value="Guardar" actionListener="#{usuarioController.registrar}"  update="formUsuarios"/>
+               <p:commandButton value="Eliminar" actionListener="#{usuarioController.eliminar}" update="formUsuarios"/>
+               <p:commandButton value="Cancelar" actionListener="#{usuarioController.inicializar}" update="formUsuarios"/>
               </p:panelGrid>
             </p:panel>
+       
            </h:panelGroup>
+        
+        <h3>Usuarios registrados</h3>	
+	<p:dataTable id="usuarioDT" var="usuario" value="#{usuarioController.listaUsuario}"
+				selection="#{usuarioController.usuarioDTOSelected}" rowKey="#{usuario.id}"
+				scrollable="true" scrollHeight="230" style="font-size: 16px;">
+				<p:ajax event="rowSelectRadio" listener="#{usuarioController.seleccionar}" update="formAlicuotas"></p:ajax>
+				<p:column selectionMode="single"
+					style="width:35px;text-align:center" />
+			<p:column headerText="Id">
+			<h:outputText value="#{usuario.id}" />
+			</p:column>
+			<p:column headerText="Nombre">
+		    <h:outputText value="#{usuario.nombreUsuario}" />
+			</p:column>
+			<p:column headerText="Valor">
+			<h:outputText value="#{usuario.valorUsuario}" />
+			</p:column>
+			<p:column headerText="Referencia">
+			<h:outputText value="#{usuario.usuarioRelacionado.id}" />
+			</p:column>
+	</p:dataTable>
+			
        </h:form>
     </ui:define>
 </ui:composition>

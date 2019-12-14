@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
 
 /**
@@ -59,4 +60,9 @@ public interface IUsuarioDAO extends JpaRepository<UsuarioDTO, Long>
 	 */
 	public UsuarioDTO findByEstadoAndCedulaAndContrasenia(
 			String estado, String cedula, String contrasenia);
+
+	
+     UsuarioDTO findById(Integer id);
+
+	
 }
