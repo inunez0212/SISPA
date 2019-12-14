@@ -13,7 +13,7 @@
            <h:panelGroup id="display">
             <p:panel style="width: 80%; margin: 0px auto;">
                <p:panelGrid columns="4" >
-               		<p:outputLabel value="ID" for="id" />
+               		<p:outputLabel value="Cédula" for="id" />
 					<p:inputText id="id" value="#{usuarioController.usuarioDTO.cedula}"
 						disabled="false" style="width:99%" maxlength="5"/>
 					<p:outputLabel value="Contraseña" for="contrasenia" />
@@ -26,21 +26,27 @@
 					<p:inputText id="apellido" value="#{usuarioController.usuarioDTO.apellido}"
 						disabled="false" style="width:99%" maxlength="5"/>
 					<p:outputLabel value="Cargo" for="cargo" />
-					<p:inputText id="cargo" value="#{usuarioController.usuarioDTO.cargo}"
-						disabled="false" style="width:99%" maxlength="5"/>
+					<p:selectOneMenu id="cargo"
+						value="#{usuarioController.usuarioDTO.cargo}">
+						<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
+						<f:selectItem itemValue="Presidencia" itemLabel="Presidencia"></f:selectItem>
+						<f:selectItem itemValue="Tesorería" itemLabel="Tesorería"></f:selectItem>
+						<f:selectItem itemValue="Secretaría" itemLabel="Secretaría"></f:selectItem>
+					</p:selectOneMenu>
 					<p:outputLabel value="Direccion" for="direccion" />
 					<p:inputText id="direccion" value="#{usuarioController.usuarioDTO.direccion}"
 						disabled="false" style="width:99%" maxlength="5"/>
-					<p:outputLabel value="Telefono1" for="telefono1" />
+					<p:outputLabel value="Celular" for="telefono1" />
 					<p:inputText id="telefono1" value="#{usuarioController.usuarioDTO.telefono1}"
 						disabled="false" style="width:99%" maxlength="5"/>
 					<p:outputLabel value="Telefono2" for="telefono2" />
 					<p:inputText id="telefono2" value="#{usuarioController.usuarioDTO.telefono2}"
 						disabled="false" style="width:99%" maxlength="5"/>
 					<p:outputLabel value="Estado" for="estado" />
-					<p:inputText id="estado" value="#{usuarioController.usuarioDTO.estado}"
-						disabled="false" style="width:99%" maxlength="5"/>
-						
+					<p:selectOneMenu id="estado"
+						value="#{usuarioController.usuarioDTO.estado}">
+						<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
+					</p:selectOneMenu>
                   
                </p:panelGrid>
               <p:panelGrid columns="4" style="width: 50%; margin: 0px auto;" layout="grid">
@@ -54,10 +60,10 @@
            </h:panelGroup>
         
         <h3>Usuarios registrados</h3>	
-	<p:dataTable id="usuarioDT" var="usuario" value="#{usuarioController.listaUsuario}"
+	<p:dataTable id="usuarioDT" var="usuario" value="#{usuarioController.listaUsuarios}"
 				selection="#{usuarioController.usuarioDTOSelected}" rowKey="#{usuario.id}"
 				scrollable="true" scrollHeight="230" style="font-size: 16px;">
-				<p:ajax event="rowSelectRadio" listener="#{usuarioController.seleccionar}" update="formAlicuotas"></p:ajax>
+				<p:ajax event="rowSelectRadio" listener="#{usuarioController.seleccionar}" update="formUsuarios"></p:ajax>
 				<p:column selectionMode="single"
 					style="width:35px;text-align:center" />
 			<p:column headerText="Id">

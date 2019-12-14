@@ -10,8 +10,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -50,9 +48,6 @@ public class UsuarioDTO implements Serializable{
 	
 	private String estado;
 	
-	@JoinColumn(name = "tipousuario", referencedColumnName = "id")
-    @ManyToOne
-	private CatalogoDTO tipoUsuario;
 
 	/**
 	 * @return the id
@@ -178,20 +173,6 @@ public class UsuarioDTO implements Serializable{
 	 */
 	public void setEstado(String estado) {
 		this.estado = estado;
-	}
-
-	/**
-	 * @return the tipoUsuario
-	 */
-	public CatalogoDTO getTipoUsuario() {
-		return tipoUsuario;
-	}
-
-	/**
-	 * @param tipoUsuario the tipoUsuario to set
-	 */
-	public void setTipoUsuario(CatalogoDTO tipoUsuario) {
-		this.tipoUsuario = tipoUsuario;
 	}
 
 	/**

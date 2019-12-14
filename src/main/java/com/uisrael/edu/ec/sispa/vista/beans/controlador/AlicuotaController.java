@@ -57,6 +57,8 @@ public class AlicuotaController implements Serializable{
 	private List<AlicuotaDTO> alicuotasDTOList; 
 	
 	private List<DepartamentoDTO> departamentoDTOList;
+
+	private List<DepartamentoDTO> departamentoFilteredDTOList;
 	
 	private DepartamentoDTO departamentoSelectedDTO;
 	
@@ -69,6 +71,15 @@ public class AlicuotaController implements Serializable{
 		alicuotasDTOList = new ArrayList<>();
 		alicuotaSelectedDTO = new AlicuotaDTO();
 		valorPago=BigDecimal.ZERO;
+		inicializarPago();
+	}
+	
+	private void inicializarPago() {
+		if(departamentoDTOList!=null) {
+			for(DepartamentoDTO departamento : departamentoDTOList) {
+				departamento.setEstadoPago(this.verificarPago(departamento.getId()));
+			}
+		}
 	}
 
 	/**
@@ -134,6 +145,12 @@ public class AlicuotaController implements Serializable{
 		return estadoRegistro;
 	}
 
+	public void filtrar() {
+		
+	}
+
+    public void imprimir() {
+    }		
 	/**
 	 * @return the sessionController
 	 */
@@ -231,6 +248,20 @@ public class AlicuotaController implements Serializable{
 	 */
 	public void setIdAlicuotaPago(Integer idAlicuotaPago) {
 		this.idAlicuotaPago = idAlicuotaPago;
+	}
+
+	/**
+	 * @return the departamentoFilteredDTOList
+	 */
+	public List<DepartamentoDTO> getDepartamentoFilteredDTOList() {
+		return departamentoFilteredDTOList;
+	}
+
+	/**
+	 * @param departamentoFilteredDTOList the departamentoFilteredDTOList to set
+	 */
+	public void setDepartamentoFilteredDTOList(List<DepartamentoDTO> departamentoFilteredDTOList) {
+		this.departamentoFilteredDTOList = departamentoFilteredDTOList;
 	}
 
 	

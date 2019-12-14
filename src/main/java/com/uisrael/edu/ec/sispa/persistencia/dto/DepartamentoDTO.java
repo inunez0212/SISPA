@@ -15,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * @author Ivan
@@ -49,6 +50,9 @@ public class DepartamentoDTO implements Serializable{
 	@OneToMany(mappedBy = "departamentoDTO")
     private Collection<AlicuotaDTO> alicuotasCOL;
 
+	@Transient
+	private String estadoPago;
+	
 	/**
 	 * @return the id
 	 */
@@ -147,5 +151,18 @@ public class DepartamentoDTO implements Serializable{
 		this.alicuotasCOL = alicuotasCOL;
 	}
 
+	/**
+	 * @return the estadoPago
+	 */
+	public String getEstadoPago() {
+		return estadoPago;
+	}
+
+	/**
+	 * @param estadoPago the estadoPago to set
+	 */
+	public void setEstadoPago(String estadoPago) {
+		this.estadoPago = estadoPago;
+	}
 	
 }
