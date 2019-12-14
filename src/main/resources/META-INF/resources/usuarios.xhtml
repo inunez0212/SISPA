@@ -6,18 +6,24 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 template="/admin.xhtml">
     
+  
    <!-- Aqui se define la pagina -->
     <ui:define name="body">
-		
+	  	<style type="text/css">
+	    	body .ui-radiobutton .ui-radiobutton-box.ui-state-default{
+	    		border: 1px solid black;
+			}
+	    </style>
+	    <h3 style="margin-top: 0px">Usuarios del sistema</h3>
 		 <h:form id="formUsuarios">
            <h:panelGroup id="display">
             <p:panel style="width: 80%; margin: 0px auto;">
                <p:panelGrid columns="4" >
-               		<p:outputLabel value="Cédula" for="id" />
+               		<p:outputLabel value="Cédula" for="id"  />
 					<p:inputText id="id" value="#{usuarioController.usuarioDTO.cedula}"
 						disabled="false" style="width:99%" maxlength="5"/>
 					<p:outputLabel value="Contraseña" for="contrasenia" />
-					<p:inputText id="contrasenia" value="#{usuarioController.usuarioDTO.contrasenia}"
+					<p:password id="contrasenia" value="#{usuarioController.usuarioDTO.contrasenia}"
 						disabled="false"  style="width:99%" maxlength="5"/>
 					<p:outputLabel value="Nombre" for="nombre" />
 					<p:inputText id="nombre" value="#{usuarioController.usuarioDTO.nombre}"
@@ -65,18 +71,27 @@
 				scrollable="true" scrollHeight="230" style="font-size: 16px;">
 				<p:ajax event="rowSelectRadio" listener="#{usuarioController.seleccionar}" update="formUsuarios"></p:ajax>
 				<p:column selectionMode="single"
-					style="width:35px;text-align:center" />
+					style="width:35px;text-align:center; " />
 			<p:column headerText="Id">
-			<h:outputText value="#{usuario.id}" />
+				<h:outputText value="#{usuario.cedula}" />
 			</p:column>
 			<p:column headerText="Nombre">
-		    <h:outputText value="#{usuario.nombreUsuario}" />
+		    	<h:outputText value="#{usuario.nombre}" />
 			</p:column>
-			<p:column headerText="Valor">
-			<h:outputText value="#{usuario.valorUsuario}" />
+			<p:column headerText="Apellido">
+		    	<h:outputText value="#{usuario.apellido}" />
 			</p:column>
-			<p:column headerText="Referencia">
-			<h:outputText value="#{usuario.usuarioRelacionado.id}" />
+			<p:column headerText="Nombre">
+		    	<h:outputText value="#{usuario.cargo}" />
+			</p:column>
+			<p:column headerText="Nombre">
+		    	<h:outputText value="#{usuario.direccion}" />
+			</p:column>
+			<p:column headerText="Nombre">
+		    	<h:outputText value="#{usuario.telefono1}" />
+			</p:column>
+			<p:column headerText="Nombre">
+		    	<h:outputText value="#{usuario.telefono2}" />
 			</p:column>
 	</p:dataTable>
 			

@@ -7,8 +7,14 @@
 
 	<!-- Aqui se define la pagina -->
 	<ui:define name="body">
-<h3 style="margin-top: 0px">Catálogos del sistema</h3>
-		<h:form id="formAlicuotas" >
+
+		<style type="text/css">
+	    	body .ui-radiobutton .ui-radiobutton-box.ui-state-default{
+	    		border: 1px solid black;
+			}
+    	</style>
+    <h3 style="margin-top: 0px">Catálogos del sistema</h3>
+	<h:form id="formAlicuotas" >
 			<p:panel style="width: 80%; margin: 0px auto;">
 				<p:panelGrid columns="6" layout="grid">
 					<p:outputLabel value="ID" for="id" />

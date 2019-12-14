@@ -11,9 +11,7 @@ import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
-import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IUsuarioServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
@@ -64,6 +62,18 @@ public class UsuarioController implements Serializable{
 		}
     }
 	
+	public void eliminar() {
+    	try {
+    		if(this.validarRegistro()) {
+    			this.usuarioServicio.eliminar(usuarioDTO);
+    			inicializar();
+    			JsfUtil.addSuccessMessage("Usuario eliminado correctamente");
+    		}
+    	}catch (Exception e) {
+    		e.printStackTrace();
+			JsfUtil.addErrorMessage("No se pudo eliminar el Usuario");
+		}
+    }
 	
 
 	private boolean validarRegistro() {
@@ -99,6 +109,16 @@ public class UsuarioController implements Serializable{
 		
 		return validacion;
 	}
+	
+	 public void seleccionar() {
+	    	this.usuarioDTO = this.usuarioDTOSelected;
+	    	if(this.usuarioDTOSelected.getCargo()!=null) {
+	    		this.perfil=this.usuarioDTOSelected.getCargo();
+	    	}
+	    	
+	    }
+	 
+	 
 	/**
 	 * @return the sessionController
 	 */
