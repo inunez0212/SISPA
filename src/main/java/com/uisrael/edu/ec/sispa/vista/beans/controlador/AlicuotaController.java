@@ -3,19 +3,28 @@
  */
 package com.uisrael.edu.ec.sispa.vista.beans.controlador;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.sispa.constantes.Constantes;
@@ -25,6 +34,14 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.IAlicuotaServicio;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IDepartamentoServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
+
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  * @author kali
@@ -99,7 +116,7 @@ public class AlicuotaController implements Serializable{
 				dato -> Integer.parseInt(dato.getAnio())==anioActual.intValue() && 
 				dato.getMes().equalsIgnoreCase(mesActual.getDisplayName(TextStyle.FULL,new Locale("es", "ES"))))
 				.findAny().orElse(null);
-			if(alicuota!=null && alicuota.getValorPagado().compareTo(alicuota.getValorAlicuota())==0) {
+			if(alicuota!=null && alicuota.getValorPagado()!=null && alicuota.getValorPagado().compareTo(alicuota.getValorAlicuota())==0) {
 				estado = Constantes.ESTADO_PAGADO;
 			}
 		}
@@ -114,16 +131,17 @@ public class AlicuotaController implements Serializable{
 	
 	public void guardar() {
     	try {
-    		if(this.validarRegistro()) {
+    		if(this.validarRegistro()) { 
     			alicuotaSelectedDTO.setFechaPago(new Date());
     			alicuotaSelectedDTO.setUsuario(this.sessionController.getNombreUsuarioLogueado());
     			this.alicuotaServicio.actualizarAlicuota(alicuotaSelectedDTO);
-    			inicializar();
+    			this.imprimir();
+    			this.inicializar();
     			JsfUtil.addSuccessMessage("Pago guardado correctamente");
     		}else {
     			JsfUtil.addErrorMessage("No se encontró el registro para actualizar");
     		}
-    	}catch (Exception e) {
+     	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo guardar el pago de la alicuota");
 		}
@@ -131,14 +149,14 @@ public class AlicuotaController implements Serializable{
 
 	public void seleccionarAlicuota() {
 		this.alicuotaSelectedDTO = this.alicuotaServicio.findById(this.idAlicuotaPago);
+		this.alicuotaSelectedDTO.setDepartamentoDTO(SerializationUtils.clone(departamentoSelectedDTO));
 	}
 	
 	private boolean validarRegistro() {
 		boolean estadoRegistro = true;
 		if(alicuotaSelectedDTO == null) {
 			estadoRegistro = false;
-		}
-		if(valorPago==null || valorPago.compareTo(BigDecimal.ONE)< 0) {
+		}else if(alicuotaSelectedDTO.getValorPagado()==null || alicuotaSelectedDTO.getValorPagado().compareTo(BigDecimal.ONE)< 0) {
 			estadoRegistro = false;
 			JsfUtil.addErrorMessage("El valor del pago debe ser mayor a 1");
 		}
@@ -149,8 +167,42 @@ public class AlicuotaController implements Serializable{
 		
 	}
 
-    public void imprimir() {
-    }		
+	   
+    public void imprimir() throws Exception {
+        SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd");
+        String filename = "Recibo.pdf";
+        String jasperPath ="/resources/recibo.jasper";
+        Map<String, Object> parametros = new HashMap<>(); 
+        parametros.put("departamento", alicuotaSelectedDTO.getDepartamentoDTO().getBloque() 
+        		+ " " + alicuotaSelectedDTO.getDepartamentoDTO().getNumero());
+        parametros.put("propietario", alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getNombre() 
+        		+ " "+ alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getApellido());
+        parametros.put("anio", alicuotaSelectedDTO.getAnio());
+        parametros.put("mes", alicuotaSelectedDTO.getMes());
+        parametros.put("alicuota", alicuotaSelectedDTO.getValorAlicuota());
+        parametros.put("pago", alicuotaSelectedDTO.getValorPagado());
+        parametros.put("usuario", alicuotaSelectedDTO.getAnio());
+        parametros.put("fecha", alicuotaSelectedDTO.getFechaPago());
+        this.generarPDF(parametros, jasperPath, new ArrayList<>(), filename);
+    }
+            
+
+    public void generarPDF(Map<String, Object> params, String jasperPhath, List<?> datasurce, String fileName ) throws JRException, IOException {
+        String relativeWebPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath(jasperPhath);
+        File file = new File(relativeWebPath);
+        JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getClassLoader().getResourceAsStream(path.trim()));
+        
+        
+//        JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(datasurce, false);
+//        JasperPrint print = JasperFillManager.fillReport(file.getPath(), params, source);
+//        HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+//        response.addHeader("Content-disposition","attachment;filename="+ fileName);
+//        ServletOutputStream stream = response.getOutputStream();
+//        JasperExportManager.exportReportToPdfStream(print, stream);
+//        FacesContext.getCurrentInstance().responseComplete();
+        
+    }
+    
 	/**
 	 * @return the sessionController
 	 */

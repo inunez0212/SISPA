@@ -40,6 +40,9 @@ public class CargasController implements Serializable{
 	
 	@Autowired
 	private SessionController sessionController;
+	
+	@Autowired 
+	private AlicuotaController alicuotaController;
 		
 	private String anio;
 	
@@ -58,11 +61,18 @@ public class CargasController implements Serializable{
     public void handleFileUpload(FileUploadEvent event) {
     	try {
     		this.alicuotasServicio.cargarDatos(event.getFile().getContents());
+    		alicuotaController.inicializar();
     		JsfUtil.addSuccessMessage("Archivo cargado correctamente");
-    	}catch (IOException ioe) {
-    		JsfUtil.addErrorMessage("Error en el archivo"+ ioe.getMessage());
+    	}catch (ArrayIndexOutOfBoundsException e) {
+    		e.printStackTrace();
+    		JsfUtil.addErrorMessage("Error, verifique que el delimitador del archivo sea: '"+Constantes.DELIMITADOR_ARCHIVO+"'");
+		}
+    	catch (IOException e) {
+    		e.printStackTrace();
+    		JsfUtil.addErrorMessage( e.getMessage());
     	}catch(Exception e) {
-    		JsfUtil.addErrorMessage("Error en el archivo"+ event.getFile().getFileName());
+    		e.printStackTrace();
+    		JsfUtil.addErrorMessage("Error en el archivo "+ event.getFile().getFileName());
     	}
     }
     
@@ -73,11 +83,40 @@ public class CargasController implements Serializable{
     		}
     		this.alicuotasServicio.generarNuevoAnio(this.anio, this.sessionController.getNombreUsuarioLogueado(),
     				BigDecimal.valueOf(this.valorAlicuota));
+    		this.inicializar();
     		JsfUtil.addSuccessMessage("Datos para el año " +this.anio+" cargados correctamente" );
     	}catch (Exception ioe) {
     		JsfUtil.addErrorMessage("Error, "+ ioe.getMessage());
     	}
     }
+
+	/**
+	 * @return the sessionController
+	 */
+	public SessionController getSessionController() {
+		return sessionController;
+	}
+
+	/**
+	 * @param sessionController the sessionController to set
+	 */
+	public void setSessionController(SessionController sessionController) {
+		this.sessionController = sessionController;
+	}
+
+	/**
+	 * @return the alicuotaController
+	 */
+	public AlicuotaController getAlicuotaController() {
+		return alicuotaController;
+	}
+
+	/**
+	 * @param alicuotaController the alicuotaController to set
+	 */
+	public void setAlicuotaController(AlicuotaController alicuotaController) {
+		this.alicuotaController = alicuotaController;
+	}
 
 	/**
 	 * @return the anio

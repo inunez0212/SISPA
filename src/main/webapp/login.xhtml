@@ -13,9 +13,12 @@
 	<div class="login-form">
 		<h:form id="helloworld-form">
 		<h1>Identificarse</h1>
-		
+		<p:messages id="messagess" closable="true" globalOnly="true" autoUpdate="true"
+                showDetail="false" severity="error,fatal" escape="false">
+        <p:autoUpdate/>
+        </p:messages>
         <p:inputText id="cedula" value="#{sessionController.usuarioDTO.cedula}" placeholder= "ID"/>
-        <p:inputText id="contrasenia" value="#{sessionController.usuarioDTO.contrasenia}" placeholder ="Pass"/>
+        <p:password id="contrasenia" value="#{sessionController.usuarioDTO.contrasenia}" placeholder ="Pass"/>
         <p:commandButton id="submit" value="Ingresar" actionListener="#{sessionController.ingresar}" class = "login-btn" />
           
 		</h:form>

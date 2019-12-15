@@ -29,20 +29,23 @@ public class SessionController implements Serializable{
 
 	@Autowired
 	private IUsuarioServicio usuarioServicio;
+	@Autowired 
+	AlicuotaController alicuotaController;
 
-	private UsuarioDTO usuarioDTO;
+	private UsuarioDTO usuarioDTO = new UsuarioDTO();
 	
 	public void ingresar() {
 		try {
 			usuarioDTO = this.usuarioServicio.identificarUsuario(usuarioDTO);
 			if(usuarioDTO!=null) {
+				alicuotaController.inicializar();
 				JsfUtil.addSuccessMessage("Bienvendo "+usuarioDTO.getNombre());
 				FacesContext fContext = FacesContext.getCurrentInstance();
 				ExternalContext extContext = fContext.getExternalContext();
-				extContext.redirect(extContext.getRequestContextPath() + "/catalogo.xhtml");
+				extContext.redirect(extContext.getRequestContextPath() + "/alicuotas.xhtml");
 			}else {
 				usuarioDTO = new UsuarioDTO();
-				JsfUtil.addErrorMessage("Usuario y/o contraseÃ±a incorrectos");
+				JsfUtil.addErrorMessage("Credenciales incorrectas");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -70,6 +73,20 @@ public class SessionController implements Serializable{
 			nombre=this.usuarioDTO.getNombre() +" "+this.getUsuarioDTO().getApellido();
 		}
 		return nombre;
+	}
+
+	/**
+	 * @return the alicuotaController
+	 */
+	public AlicuotaController getAlicuotaController() {
+		return alicuotaController;
+	}
+
+	/**
+	 * @param alicuotaController the alicuotaController to set
+	 */
+	public void setAlicuotaController(AlicuotaController alicuotaController) {
+		this.alicuotaController = alicuotaController;
 	}
 	
 	

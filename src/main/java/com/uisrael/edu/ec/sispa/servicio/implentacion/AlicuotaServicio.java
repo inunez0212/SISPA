@@ -87,15 +87,16 @@ public class AlicuotaServicio implements IAlicuotaServicio{
 
 	private void cargarDatosAlicuota(DepartamentoDTO departamentoDTO, String usuario, String anio, String mes,
 			String valor, String pago, String fecha, int numeroFila) throws IOException {
-		String[] cabeceras = {usuario, anio, mes, valor};
+		String[] cabeceras = { anio, mes, valor};
 		if(this.validarDatos(cabeceras)) {
-			throw new IOException("Error en datos de alicuota, fila "+ (numeroFila-1));
+			throw new IOException("Error en datos de alicuota, fila "+ (numeroFila+1));
 		}
 		AlicuotaDTO alicuotaDTO = new AlicuotaDTO();
 		alicuotaDTO.setAnio(anio);
 		alicuotaDTO.setDepartamentoDTO(departamentoDTO);
 		alicuotaDTO.setEstado(Constantes.ESTADO_ACTIVO);
 		alicuotaDTO.setMes(mes);
+		alicuotaDTO.setUsuario(usuario);
 		try {
 			alicuotaDTO.setValorAlicuota(BigDecimal.valueOf(Double.parseDouble(valor)));
 			if(StringUtils.isNotBlank(pago)&&StringUtils.isNotBlank(fecha)) {
@@ -134,7 +135,7 @@ public class AlicuotaServicio implements IAlicuotaServicio{
 		PropietarioDTO propietarioDTO = null;
 		String[] cabeceras = {cedula,nombre,apellido,email,telefono};
 		if(this.validarDatos(cabeceras)) {
-			throw new IOException("Error en datos del propietario, fila "+ (numeroFila-1));
+			throw new IOException("Error en datos del propietario, fila "+ (numeroFila));
 		}
 		propietarioDTO = this.propietarioDAO.findByCedula(cedula);
 		if(propietarioDTO==null) {

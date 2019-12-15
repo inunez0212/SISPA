@@ -21,16 +21,16 @@
                <p:panelGrid columns="4" >
                		<p:outputLabel value="Cédula" for="id"  />
 					<p:inputText id="id" value="#{usuarioController.usuarioDTO.cedula}"
-						disabled="false" style="width:99%" maxlength="5"/>
+						disabled="false" style="width:99%" maxlength="10"/>
 					<p:outputLabel value="Contraseña" for="contrasenia" />
 					<p:password id="contrasenia" value="#{usuarioController.usuarioDTO.contrasenia}"
-						disabled="false"  style="width:99%" maxlength="5"/>
+						disabled="false"  style="width:99%" maxlength="8"/>
 					<p:outputLabel value="Nombre" for="nombre" />
 					<p:inputText id="nombre" value="#{usuarioController.usuarioDTO.nombre}"
-						disabled="false" style="width:99%" maxlength="5"/>
+						disabled="false" style="width:99%" maxlength="50"/>
 					<p:outputLabel value="Apellido" for="apellido" />
 					<p:inputText id="apellido" value="#{usuarioController.usuarioDTO.apellido}"
-						disabled="false" style="width:99%" maxlength="5"/>
+						disabled="false" style="width:99%" maxlength="50"/>
 					<p:outputLabel value="Cargo" for="cargo" />
 					<p:selectOneMenu id="cargo"
 						value="#{usuarioController.usuarioDTO.cargo}">
@@ -41,13 +41,13 @@
 					</p:selectOneMenu>
 					<p:outputLabel value="Direccion" for="direccion" />
 					<p:inputText id="direccion" value="#{usuarioController.usuarioDTO.direccion}"
-						disabled="false" style="width:99%" maxlength="5"/>
+						disabled="false" style="width:99%" maxlength="100"/>
 					<p:outputLabel value="Celular" for="telefono1" />
 					<p:inputText id="telefono1" value="#{usuarioController.usuarioDTO.telefono1}"
-						disabled="false" style="width:99%" maxlength="5"/>
+						disabled="false" style="width:99%" maxlength="10"/>
 					<p:outputLabel value="Telefono2" for="telefono2" />
 					<p:inputText id="telefono2" value="#{usuarioController.usuarioDTO.telefono2}"
-						disabled="false" style="width:99%" maxlength="5"/>
+						disabled="false" style="width:99%" maxlength="10"/>
 					<p:outputLabel value="Estado" for="estado" />
 					<p:selectOneMenu id="estado"
 						value="#{usuarioController.usuarioDTO.estado}">
@@ -81,16 +81,16 @@
 			<p:column headerText="Apellido">
 		    	<h:outputText value="#{usuario.apellido}" />
 			</p:column>
-			<p:column headerText="Nombre">
+			<p:column headerText="Cargo">
 		    	<h:outputText value="#{usuario.cargo}" />
 			</p:column>
-			<p:column headerText="Nombre">
+			<p:column headerText="Dirección">
 		    	<h:outputText value="#{usuario.direccion}" />
 			</p:column>
-			<p:column headerText="Nombre">
+			<p:column headerText="Celular">
 		    	<h:outputText value="#{usuario.telefono1}" />
 			</p:column>
-			<p:column headerText="Nombre">
+			<p:column headerText="Teléfono">
 		    	<h:outputText value="#{usuario.telefono2}" />
 			</p:column>
 	</p:dataTable>

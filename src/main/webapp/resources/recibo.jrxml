@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.11.0.final using JasperReports Library version 6.11.0-0c4056ccaa4d25a5a8c45672d2f764ea3498bebb  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="84bcc98b-4f22-4337-bfce-04b7339f6c45">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<staticText>
+				<reportElement x="190" y="45" width="160" height="21" uuid="f0610f55-89de-471e-bc63-5ef348cac13e"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[El PORTAL DE ALCALÁ]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="3" width="550" height="10" forecolor="#267678" backcolor="#267678" uuid="cd967f97-6d72-4a20-b4bf-35db898e2a3e">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#267678"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="100" width="550" height="10" forecolor="#267678" backcolor="#267678" uuid="8655534b-5140-4e4d-bee6-9cdfd077f897">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#267678"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="180" y="24" width="220" height="21" uuid="6f6470a7-3df8-477d-b1ae-20583adfc969"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CONJUNTO RESIDENCIAL]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="11" y="4" width="130" height="30" uuid="c1d82843-2486-4758-8c12-a0335319f7ca"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Departamento:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="141" y="4" width="100" height="30" uuid="0043ad5c-4b77-41bc-a4dd-967f5096983e"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "departamento" )]]></textFieldExpression>
+				<patternExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "departamento" )]]></patternExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="35" width="100" height="30" uuid="1b697abc-8441-4a56-838c-af3f11a81fae"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "propietario" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="35" width="130" height="30" uuid="39f4f35f-bdd1-48db-bb26-47be2bf6810e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Propietario:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="238" y="35" width="100" height="30" uuid="77de0eaa-7a31-41d1-80eb-094ac3ec0835"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "cedula" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="364" y="5" width="47" height="30" uuid="1a50900c-d50b-4e21-b585-3d73a8e31365"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Año:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="411" y="5" width="100" height="30" uuid="d62eb60f-1532-43d7-819c-9fb6fb11c8fc"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "anio" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="364" y="34" width="47" height="30" uuid="ea91a200-689c-4807-a02b-7cf7bd0b1ca3"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mes:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="411" y="34" width="100" height="30" uuid="2b7dbb92-df1b-44fe-b757-6d0c68cab322"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "mes" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="75" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="0" y="0" width="550" height="10" forecolor="#267678" backcolor="#267678" uuid="e202ca1f-eae7-442a-9480-6f640dcdb284">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#267678"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="11" y="14" width="130" height="30" uuid="df748d23-4922-410b-b752-f5e297586bfb"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor alicuota:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="141" y="14" width="100" height="30" uuid="6247cd0b-f550-4530-969c-08a2c64a447d"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "alicuota" )]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="141" y="44" width="100" height="30" uuid="f4221d14-0900-442f-8852-5394884ff660"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "pago" )]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="11" y="44" width="130" height="30" uuid="4a616171-1e42-45d4-a855-41c9205072e0"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor pagado:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="364" y="14" width="47" height="30" uuid="8878776e-ad8f-445b-b2ec-7e93d44edb1c"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="411" y="14" width="100" height="30" uuid="2f2ab586-01cc-45ab-b5d2-aa6ecd37fbf5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "fecha" )]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="130" splitType="Stretch">
+			<rectangle>
+				<reportElement mode="Opaque" x="2" y="0" width="550" height="10" forecolor="#267678" backcolor="#267678" uuid="f48cf8c5-c99f-45ac-b76a-0387284fb839">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#267678"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="180" y="60" width="90" height="30" uuid="fb8b406e-1afd-4cf3-a201-e626819f7a28"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Recibido por:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="270" y="60" width="100" height="30" uuid="c6582d37-858a-42ff-a29a-dd4fd94406e5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{REPORT_PARAMETERS_MAP}.get( "usuario" )]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="2" y="90" width="550" height="10" forecolor="#267678" backcolor="#267678" uuid="7520ff5a-8194-4a12-98d7-617f651a15ca">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineStyle="Solid" lineColor="#267678"/>
+				</graphicElement>
+			</rectangle>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
