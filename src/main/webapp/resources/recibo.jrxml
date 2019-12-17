@@ -11,11 +11,11 @@
 	<title>
 		<band height="110" splitType="Stretch">
 			<staticText>
-				<reportElement x="190" y="45" width="160" height="21" uuid="f0610f55-89de-471e-bc63-5ef348cac13e"/>
+				<reportElement x="190" y="45" width="180" height="21" uuid="f0610f55-89de-471e-bc63-5ef348cac13e"/>
 				<textElement>
 					<font size="14" isBold="true"/>
 				</textElement>
-				<text><![CDATA[El PORTAL DE ALCALÁ]]></text>
+				<text><![CDATA[EL PORTAL DE ALCALA]]></text>
 			</staticText>
 			<rectangle>
 				<reportElement mode="Opaque" x="0" y="3" width="550" height="10" forecolor="#267678" backcolor="#267678" uuid="cd967f97-6d72-4a20-b4bf-35db898e2a3e">

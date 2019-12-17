@@ -35,13 +35,15 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IDepartamentoServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
+import net.sf.jasperreports.engine.JRDataSource;
+import net.sf.jasperreports.engine.JREmptyDataSource;
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 /**
  * @author kali
@@ -177,29 +179,31 @@ public class AlicuotaController implements Serializable{
         		+ " " + alicuotaSelectedDTO.getDepartamentoDTO().getNumero());
         parametros.put("propietario", alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getNombre() 
         		+ " "+ alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getApellido());
+        parametros.put("cedula", alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getCedula());
         parametros.put("anio", alicuotaSelectedDTO.getAnio());
         parametros.put("mes", alicuotaSelectedDTO.getMes());
         parametros.put("alicuota", alicuotaSelectedDTO.getValorAlicuota());
         parametros.put("pago", alicuotaSelectedDTO.getValorPagado());
-        parametros.put("usuario", alicuotaSelectedDTO.getAnio());
-        parametros.put("fecha", alicuotaSelectedDTO.getFechaPago());
-        this.generarPDF(parametros, jasperPath, new ArrayList<>(), filename);
+        parametros.put("usuario", alicuotaSelectedDTO.getUsuario());
+        parametros.put("fecha", formatDate.format(alicuotaSelectedDTO.getFechaPago()));
+        this.generarPDF(parametros, jasperPath, filename);
     }
             
 
-    public void generarPDF(Map<String, Object> params, String jasperPhath, List<?> datasurce, String fileName ) throws JRException, IOException {
+    public void generarPDF(Map<String, Object> params, String jasperPhath,  String fileName ) throws JRException, IOException {
         String relativeWebPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath(jasperPhath);
         File file = new File(relativeWebPath);
-        JasperReport jasperReport = (JasperReport)JRLoader.loadObject(getClass().getClassLoader().getResourceAsStream(path.trim()));
-        
-        
-//        JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(datasurce, false);
-//        JasperPrint print = JasperFillManager.fillReport(file.getPath(), params, source);
-//        HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
-//        response.addHeader("Content-disposition","attachment;filename="+ fileName);
-//        ServletOutputStream stream = response.getOutputStream();
-//        JasperExportManager.exportReportToPdfStream(print, stream);
-//        FacesContext.getCurrentInstance().responseComplete();
+        List<JRDataSource> datasurce = new ArrayList<>();
+        datasurce.add(new JREmptyDataSource(1));
+        JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(datasurce, false);
+        //JasperReport reporte= JasperCompileManager.compileReport(file.getPath());
+        //JasperPrint print = JasperFillManager.fillReport(reporte, params, source);
+        JasperPrint print = JasperFillManager.fillReport(file.getPath(), params, source);
+        HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+        response.addHeader("Content-disposition","attachment;filename="+ fileName);
+        ServletOutputStream stream = response.getOutputStream();
+        JasperExportManager.exportReportToPdfStream(print, stream);
+        FacesContext.getCurrentInstance().responseComplete();
         
     }
     

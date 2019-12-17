@@ -97,8 +97,13 @@
 						<p:outputLabel value="Pago" for="pago" />
 						<p:inputText id="pago" style="width:99%" maxlength="7"
 							value="#{alicuotaController.alicuotaSelectedDTO.valorPagado}" />
-						<p:commandLink  value="Pagar" ajax="false" actionListener="#{alicuotaController.guardar}">
-						</p:commandLink>
+						<p:commandButton  value="Pagar" ajax="false" 
+							onclick="PF('pagoDialog').hide()"	
+							actionListener="#{alicuotaController.guardar}">
+						</p:commandButton>
+						<p:commandButton  value="Cancelar" ajax="true" 
+							onclick="PF('pagoDialog').hide()">
+						</p:commandButton>
 					</p:panelGrid>		            
 				</p:outputPanel>
 			</p:dialog>
