@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core" template="/admin.xhtml">
+
+	<!-- Aqui se define la pagina -->
+	<ui:define name="body">
+
+		<style type="text/css">
+	    	body .ui-radiobutton .ui-radiobutton-box.ui-state-default{
+	    		border: 1px solid black;
+			}
+    	</style>
+    <h3 style="margin-top: 0px">Catálogos del sistema</h3>
+	<h:form id="formAlicuotas" >
+			<p:panel style="width: 80%; margin: 0px auto;">
+				<p:panelGrid columns="6" layout="grid">
+					<p:outputLabel value="ID" for="id" />
+					<p:inputText id="id" value="#{catalogoController.catalogoDTO.id}"
+						disabled="false" style="width:99%" maxlength="5"/>
+					<p:outputLabel value="Descripción " for="nombre" />
+					<p:inputText id="nombre" style="width:99%"
+						value="#{catalogoController.catalogoDTO.nombreCatalogo}" />
+					<p:outputLabel value="Valor " for="valor" />
+					<p:inputText id="valor" style="width:99%" maxlength="5"
+						value="#{catalogoController.catalogoDTO.valorCatalogo}" />
+					<p:outputLabel value="Código relacionado" for="relacionado" />
+					<p:selectOneMenu id="relacionado"
+						value="#{catalogoController.codigoRelacionado}">
+						<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
+						<f:selectItems value="#{catalogoController.listaCatalogos}"
+							var="items" itemLabel="#{items.id}"
+							itemValue="#{items.id}"></f:selectItems>
+					</p:selectOneMenu>
+					<p:outputLabel value="Estado" for="estado" />
+					<p:selectOneMenu id="estado"
+						value="#{catalogoController.catalogoDTO.estado}">
+						<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
+					</p:selectOneMenu>
+					
+				</p:panelGrid>
+				<p:panelGrid columns="4" style="width: 50%; margin: 0px auto;" layout="grid">
+						<p:commandButton value="Nuevo" actionListener="#{catalogoController.inicializar}" update="formAlicuotas"/>
+						<p:commandButton value="Guardar" actionListener="#{catalogoController.registrar}"  update="formAlicuotas"/>
+						<p:commandButton value="Eliminar" actionListener="#{catalogoController.eliminar}" update="formAlicuotas"/>
+						<p:commandButton value="Cancelar" actionListener="#{catalogoController.inicializar}" update="formAlicuotas"/>
+					</p:panelGrid>
+				</p:panel>
+			<h3>Catálogos registrados</h3>	
+			<p:dataTable id="catalogoDT" var="catalogo" value="#{catalogoController.listaCatalogos}"
+				selection="#{catalogoController.catalogoDTOSelected}" rowKey="#{catalogo.id}"
+				scrollable="true" scrollHeight="230" style="font-size: 16px;">
+				<p:ajax event="rowSelectRadio" listener="#{catalogoController.seleccionar}" update="formAlicuotas"></p:ajax>
+				<p:column selectionMode="single"
+					style="width:35px;text-align:center" />
+				<p:column headerText="Id">
+					<h:outputText value="#{catalogo.id}" />
+				</p:column>
+				<p:column headerText="Nombre">
+					<h:outputText value="#{catalogo.nombreCatalogo}" />
+				</p:column>
+				<p:column headerText="Valor">
+					<h:outputText value="#{catalogo.valorCatalogo}" />
+				</p:column>
+				<p:column headerText="Referencia">
+					<h:outputText value="#{catalogo.catalogoRelacionado.id}" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

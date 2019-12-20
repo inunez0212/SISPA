@@ -70,12 +70,46 @@ CREATE TABLE public.usuario (
 CREATE TABLE public.alicuota (
 	id serial NOT NULL,
 	iddepartamento int4 NULL,
+	usuario varchar(100) NULL,
 	mes varchar(15) NULL,
 	anio varchar(15) NULL,
-	valoralicuota numeric(10,3) NULL,
+	valoralicuota decimal(10,3) NULL,
 	valorpagado numeric(10,3) NULL,
 	telefono1 varchar(13) NULL,
 	estado varchar(1) NULL,
+	fechapago timestamp,  
 	CONSTRAINT alicuota_pkey PRIMARY KEY (id),
 	CONSTRAINT alicuota_iddepartamento_fkey FOREIGN KEY (iddepartamento) REFERENCES departamento(id)
+);
+
+
+create table cliente(
+id serial primary key,
+cedula  varchar(13) unique,
+nombre varchar (100),
+apellido varchar(100),
+email varchar(100),
+direccion varchar (100),
+telefono varchar(100),
+estado varchar(1) NULL
+);
+
+CREATE TABLE factura(
+	id serial primary key,
+	idcliente integer references cliente(id),
+	idusuario integer references usuario(id),
+	fecha timestamp,
+	totalSinImpuestos numeric(10,3),
+	totalConImpuestos numeric(10,3),
+	estado varchar(1) NULL
+);
+
+create table detalleFactura(
+	id serial primary key,
+	idFactura integer references factura(id),
+	idArticulo integer references articulo (id),
+	precioSinImpuestos numeric(10,3),
+	precioConImpuestos numeric(10,3), 
+	ganancia numeric(10,3),
+	estado varchar(1) NULL
 );
