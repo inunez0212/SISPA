@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.ServletOutputStream;
@@ -139,6 +140,9 @@ public class AlicuotaController implements Serializable{
     			this.alicuotaServicio.actualizarAlicuota(alicuotaSelectedDTO);
     			this.imprimir();
     			this.inicializar();
+    			FacesContext fContext = FacesContext.getCurrentInstance();
+    			ExternalContext extContext = fContext.getExternalContext();
+				extContext.redirect(extContext.getRequestContextPath() + "/alicuotas.xhtml");
     			JsfUtil.addSuccessMessage("Pago guardado correctamente");
     		}else {
     			JsfUtil.addErrorMessage("No se encontró el registro para actualizar");
@@ -158,9 +162,9 @@ public class AlicuotaController implements Serializable{
 		boolean estadoRegistro = true;
 		if(alicuotaSelectedDTO == null) {
 			estadoRegistro = false;
-		}else if(alicuotaSelectedDTO.getValorPagado()==null || alicuotaSelectedDTO.getValorPagado().compareTo(BigDecimal.ONE)< 0) {
+		}else if(alicuotaSelectedDTO.getValorPagado()==null || alicuotaSelectedDTO.getValorPagado().compareTo(alicuotaSelectedDTO.getValorAlicuota())!= 0) {
 			estadoRegistro = false;
-			JsfUtil.addErrorMessage("El valor del pago debe ser mayor a 1");
+			JsfUtil.addErrorMessage("El valor del pago debe ser igual al de la alicuota");
 		}
 		return estadoRegistro;
 	}

@@ -79,8 +79,9 @@ public class CargasController implements Serializable{
     public void nuevoAnio() {
     	try {
     		if(valorAlicuota==null || anio==null) {
-    			
+    			JsfUtil.addErrorMessage("Los datos de alicuota y año son requiridos");
     		}
+    		alicuotaController.inicializar();
     		this.alicuotasServicio.generarNuevoAnio(this.anio, this.sessionController.getNombreUsuarioLogueado(),
     				BigDecimal.valueOf(this.valorAlicuota));
     		this.inicializar();
