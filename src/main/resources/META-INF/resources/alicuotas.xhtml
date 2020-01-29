@@ -14,13 +14,13 @@
 				<p:column style="width:70px;text-align: center">
 					<p:commandButton update="alicuotaForm"
 						oncomplete="PF('alicuotaDialog').show()" icon="fa fa-search"
-						title="View">
+						title="Ver">
 						<f:setPropertyActionListener value="#{a}"
 							target="#{alicuotaController.departamentoSelectedDTO}" />
 					</p:commandButton>
 					<p:commandButton update="alicuotaForm"
 						oncomplete="PF('pagoDialog').show()" icon="fa fa-credit-card"
-						title="View">
+						title="Pago">
 						<f:setPropertyActionListener value="#{a}"
 							target="#{alicuotaController.departamentoSelectedDTO}" />
 					</p:commandButton>
@@ -78,33 +78,28 @@
 
 				</p:outputPanel>
 			</p:dialog>
-			<p:dialog header="Departamento #{alicuotaController.departamentoSelectedDTO.bloque}-#{alicuotaController.departamentoSelectedDTO.numero}" widgetVar="pagoDialog" height="60%" width="30%"
+			<p:dialog header="Departamento #{alicuotaController.departamentoSelectedDTO.bloque}-#{alicuotaController.departamentoSelectedDTO.numero}" widgetVar="pagoDialog" height="80%" width="40%"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 				<p:outputPanel id="pagoDetail" style="text-align:center;">
-		            <h3> Propietario: #{alicuotaController.departamentoSelectedDTO.propietarioDTO.nombre} #{alicuotaController.departamentoSelectedDTO.propietarioDTO.apellido}</h3>
-					<p:panelGrid layout="grid" columns="2">
-						<p:outputLabel value="Alicuota" for="relacionado" />
-						<p:selectOneMenu id="relacionado" 
-							value="#{alicuotaController.idAlicuotaPago}">
-							<p:ajax listener="#{alicuotaController.seleccionarAlicuota}" update="valAli"></p:ajax>
-							<f:selectItem itemValue="" itemLabel="Seleccione..."></f:selectItem>
-							<f:selectItems value="#{alicuotaController.alicuotasPendientes(alicuotaController.departamentoSelectedDTO.id)}"
-								var="items" itemLabel="#{items.anio} #{items.mes}" 
-								itemValue="#{items.id}"></f:selectItems>
-						</p:selectOneMenu>
-						<p:outputLabel value="Alicuota" />
-						<p:outputLabel value="#{alicuotaController.alicuotaSelectedDTO.valorAlicuota}" id="valAli"/>
-						<p:outputLabel value="Pago" for="pago" />
-						<p:inputText id="pago" style="width:99%" maxlength="7"
-							value="#{alicuotaController.alicuotaSelectedDTO.valorPagado}" />
+		            <p> Propietario: #{alicuotaController.departamentoSelectedDTO.propietarioDTO.nombre} #{alicuotaController.departamentoSelectedDTO.propietarioDTO.apellido}</p>
+						<p:dataTable scrollable="true" scrollHeight="200" id="checkboxDT" var="alicuota" value="#{alicuotaController.alicuotasPendientes(alicuotaController.departamentoSelectedDTO.id)}"
+						 selection="#{alicuotaController.idAlicuotaPagoCol}" rowKey="#{alicuota.id}" style="margin-bottom:0" emptyMessage="No tiene alicuotas pendientes" >
+					        <p:column  selectionMode="multiple" style="width:40px;text-align:center"/>
+					        <p:column headerText="Año">
+			    	        <h:outputText value="#{alicuota.anio}" />
+					        </p:column>
+					        <p:column headerText="Mes">
+					            <h:outputText value="#{alicuota.mes}" />
+					        </p:column>
+					        <p:column headerText="Valor">
+					            <h:outputText value="#{alicuota.valorAlicuota}" />
+					        </p:column>
+					    </p:dataTable>
+					    <h:outputText id="total" value="Total: #{alicuotaController.sumarTotalAlicuotas()}"> </h:outputText>
 						<p:commandButton  value="Pagar" ajax="false" 
 							onclick="PF('pagoDialog').hide()"	
 							actionListener="#{alicuotaController.guardar}">
 						</p:commandButton>
-						<p:commandButton  value="Cancelar" ajax="true" 
-							onclick="PF('pagoDialog').hide()">
-						</p:commandButton>
-					</p:panelGrid>		            
 				</p:outputPanel>
 			</p:dialog>
 			

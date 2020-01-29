@@ -40,6 +40,8 @@ public class UsuarioController implements Serializable{
 	private List<UsuarioDTO> listaUsuarios ;
 	
 	private String perfil;
+
+	private boolean esEdicion;
 	
 	@PostConstruct
 	public void inicializar() {
@@ -47,6 +49,7 @@ public class UsuarioController implements Serializable{
 		this.usuarioDTO = new UsuarioDTO();
 		this.usuarioDTOSelected=null;
 		this.perfil ="";
+		esEdicion=false;
 	}
 	
 	public void registrar() {
@@ -112,6 +115,7 @@ public class UsuarioController implements Serializable{
 	
 	 public void seleccionar() {
 	    	this.usuarioDTO = this.usuarioDTOSelected;
+	    	this.esEdicion = true;
 	    	if(this.usuarioDTOSelected.getCargo()!=null) {
 	    		this.perfil=this.usuarioDTOSelected.getCargo();
 	    	}
@@ -187,6 +191,20 @@ public class UsuarioController implements Serializable{
 	 */
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
+	}
+
+	/**
+	 * @return the esEdicion
+	 */
+	public boolean getEsEdicion() {
+		return esEdicion;
+	}
+
+	/**
+	 * @param esEdicion the esEdicion to set
+	 */
+	public void setEsEdicion(boolean esEdicion) {
+		this.esEdicion = esEdicion;
 	}
 	
 	
