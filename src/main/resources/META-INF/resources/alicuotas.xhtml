@@ -20,7 +20,7 @@
 					</p:commandButton>
 					<p:commandButton update="alicuotaForm"
 						oncomplete="PF('pagoDialog').show()" icon="fa fa-credit-card"
-						title="Pago">
+						title="Pago" actionListener="#{alicuotaController.inicializarTotal}">
 						<f:setPropertyActionListener value="#{a}"
 							target="#{alicuotaController.departamentoSelectedDTO}" />
 					</p:commandButton>
@@ -84,6 +84,8 @@
 		            <p> Propietario: #{alicuotaController.departamentoSelectedDTO.propietarioDTO.nombre} #{alicuotaController.departamentoSelectedDTO.propietarioDTO.apellido}</p>
 						<p:dataTable scrollable="true" scrollHeight="200" id="checkboxDT" var="alicuota" value="#{alicuotaController.alicuotasPendientes(alicuotaController.departamentoSelectedDTO.id)}"
 						 selection="#{alicuotaController.idAlicuotaPagoCol}" rowKey="#{alicuota.id}" style="margin-bottom:0" emptyMessage="No tiene alicuotas pendientes" >
+					        <p:ajax  event="rowSelectCheckbox" update="checkboxDT:total" process="@this" listener="#{alicuotaController.sumarTotalAlicuotas}"></p:ajax>
+					        <p:ajax  event="rowUnselectCheckbox" update="checkboxDT:total" process="@this" listener="#{alicuotaController.restarTotalAlicuotas}"></p:ajax>
 					        <p:column  selectionMode="multiple" style="width:40px;text-align:center"/>
 					        <p:column headerText="Año">
 			    	        <h:outputText value="#{alicuota.anio}" />
@@ -94,9 +96,11 @@
 					        <p:column headerText="Valor">
 					            <h:outputText value="#{alicuota.valorAlicuota}" />
 					        </p:column>
+					        <f:facet name="footer">
+					        	<h:outputText id="total" value="Total: #{alicuotaController.totalAlicuotas}"> </h:outputText>
+					        </f:facet>
 					    </p:dataTable>
-					    <h:outputText id="total" value="Total: #{alicuotaController.sumarTotalAlicuotas()}"> </h:outputText>
-						<p:commandButton  value="Pagar" ajax="false" 
+						<p:commandButton value="Pagar" ajax="false" 
 							onclick="PF('pagoDialog').hide()"	
 							actionListener="#{alicuotaController.guardar}">
 						</p:commandButton>

@@ -26,6 +26,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 import com.uisrael.edu.ec.sispa.constantes.Constantes;
 import com.uisrael.edu.ec.sispa.persistencia.dto.AlicuotaDTO;
@@ -131,6 +133,7 @@ public class AlicuotaController implements Serializable{
 	public List<AlicuotaDTO> alicuotasPendientes(Integer idDepartamento){
 		DepartamentoDTO departamento = this.departamentoServicio.findById(idDepartamento);
 		this.idAlicuotaPagoCol = new ArrayList<>();
+		
 		return this.alicuotaServicio.findByDepartamentoDTOAndValorPagadoIsNull(departamento);
 	}
 	
@@ -179,17 +182,17 @@ public class AlicuotaController implements Serializable{
         String filename = "Recibo.pdf";
         String jasperPath ="/resources/recibo.jasper";
         Map<String, Object> parametros = new HashMap<>(); 
-        parametros.put("departamento", alicuotaSelectedDTO.getDepartamentoDTO().getBloque() 
-        		+ " " + alicuotaSelectedDTO.getDepartamentoDTO().getNumero());
-        parametros.put("propietario", alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getNombre() 
-        		+ " "+ alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getApellido());
-        parametros.put("cedula", alicuotaSelectedDTO.getDepartamentoDTO().getPropietarioDTO().getCedula());
-        parametros.put("anio", alicuotaSelectedDTO.getAnio());
-        parametros.put("mes", alicuotaSelectedDTO.getMes());
-        parametros.put("alicuota", alicuotaSelectedDTO.getValorAlicuota());
-        parametros.put("pago", alicuotaSelectedDTO.getValorPagado());
-        parametros.put("usuario", alicuotaSelectedDTO.getUsuario());
-        parametros.put("fecha", formatDate.format(alicuotaSelectedDTO.getFechaPago()));
+        parametros.put("departamento", idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getBloque() 
+        		+ " " + idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getNumero());
+        parametros.put("propietario", idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getPropietarioDTO().getNombre() 
+        		+ " "+ idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getPropietarioDTO().getApellido());
+        parametros.put("cedula", idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getPropietarioDTO().getCedula());
+        parametros.put("anio", "2019");
+        parametros.put("mes", "Enero");
+        parametros.put("alicuota", idAlicuotaPagoCol.iterator().next().getValorAlicuota());
+        parametros.put("pago", this.sumarTotalAlicuotas(null));
+        parametros.put("usuario", idAlicuotaPagoCol.iterator().next().getUsuario());
+        parametros.put("fecha", formatDate.format(idAlicuotaPagoCol.iterator().next().getFechaPago()));
         this.generarPDF(parametros, jasperPath, filename);
     }
             
@@ -211,11 +214,19 @@ public class AlicuotaController implements Serializable{
         
     }
 
-    public BigDecimal sumarTotalAlicuotas(){
+    public BigDecimal sumarTotalAlicuotas(SelectEvent e){
+    	AlicuotaDTO alicuotaDTO = (AlicuotaDTO)e.getObject();
+    	totalAlicuotas = totalAlicuotas.add(alicuotaDTO.getValorAlicuota());
+    	return totalAlicuotas;
+    }
+    
+    public void inicializarTotal() {
     	this.totalAlicuotas = BigDecimal.ZERO;
-    	for(AlicuotaDTO alicuotaDTO : this.idAlicuotaPagoCol) {
-    		this.totalAlicuotas = this.totalAlicuotas.add(alicuotaDTO.getValorAlicuota());
-    	}
+    }
+    
+    public BigDecimal restarTotalAlicuotas(UnselectEvent e){
+    	AlicuotaDTO alicuotaDTO = (AlicuotaDTO)e.getObject();
+    	totalAlicuotas = totalAlicuotas.subtract(alicuotaDTO.getValorAlicuota());
     	return totalAlicuotas;
     }
     
