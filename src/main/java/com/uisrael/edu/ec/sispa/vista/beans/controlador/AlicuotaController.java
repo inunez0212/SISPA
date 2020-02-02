@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.ServletOutputStream;
@@ -150,6 +151,7 @@ public class AlicuotaController implements Serializable{
 			this.inicializar();
 			
 			JsfUtil.addSuccessMessage("Pago guardado correctamente");
+    		
      	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo guardar el pago de la alicuota");
@@ -165,9 +167,9 @@ public class AlicuotaController implements Serializable{
 		boolean estadoRegistro = true;
 		if(alicuotaSelectedDTO == null) {
 			estadoRegistro = false;
-		}else if(alicuotaSelectedDTO.getValorPagado()==null || alicuotaSelectedDTO.getValorPagado().compareTo(BigDecimal.ONE)< 0) {
+		}else if(alicuotaSelectedDTO.getValorPagado()==null || alicuotaSelectedDTO.getValorPagado().compareTo(alicuotaSelectedDTO.getValorAlicuota())!= 0) {
 			estadoRegistro = false;
-			JsfUtil.addErrorMessage("El valor del pago debe ser mayor a 1");
+			JsfUtil.addErrorMessage("El valor del pago debe ser igual al de la alicuota");
 		}
 		return estadoRegistro;
 	}
