@@ -1,8 +1,9 @@
 package com.uisrael.edu.ec.sispa.template.session;
 
+import java.util.logging.Logger;
+
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.util.logging.Logger;
 
 /**
  * Created by rmpestano on 28/04/17.

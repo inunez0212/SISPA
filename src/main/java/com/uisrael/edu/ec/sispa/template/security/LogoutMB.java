@@ -1,15 +1,16 @@
 package com.uisrael.edu.ec.sispa.template.security;
 
-import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
-import com.uisrael.edu.ec.sispa.template.util.Constants;
-
-import org.omnifaces.util.Faces;
+import java.io.IOException;
 
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.IOException;
+
+import org.omnifaces.util.Faces;
+
+import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
+import com.uisrael.edu.ec.sispa.template.util.Constants;
 
 /**
  * Created by rmpestano on 03/02/17.

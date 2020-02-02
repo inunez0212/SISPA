@@ -1,17 +1,5 @@
 package com.uisrael.edu.ec.sispa.templates.beans;
 
-import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
-import com.uisrael.edu.ec.sispa.template.model.BreadCrumb;
-import com.uisrael.edu.ec.sispa.template.util.AdminUtils;
-
-import org.omnifaces.util.Faces;
-
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.faces.context.FacesContext;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
 
 import java.io.Serializable;
@@ -19,6 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.omnifaces.util.Faces;
+
+import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
+import com.uisrael.edu.ec.sispa.template.model.BreadCrumb;
+import com.uisrael.edu.ec.sispa.template.util.AdminUtils;
 
 /**
  * Created by rafael-pestano on 30/11/16.

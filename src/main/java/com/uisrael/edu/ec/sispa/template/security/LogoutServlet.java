@@ -1,9 +1,7 @@
 package com.uisrael.edu.ec.sispa.template.security;
 
-import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
-import com.uisrael.edu.ec.sispa.template.util.Constants;
-
 import java.io.IOException;
+
 import javax.faces.context.ExternalContext;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
@@ -11,7 +9,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.omnifaces.util.Faces;
+
+import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
+import com.uisrael.edu.ec.sispa.template.util.Constants;
 
 @WebServlet(name = "adminLogoutServlet", urlPatterns = "/admin-logout")
 public class LogoutServlet extends HttpServlet {

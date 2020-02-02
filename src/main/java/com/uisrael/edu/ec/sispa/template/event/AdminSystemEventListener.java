@@ -1,14 +1,14 @@
 package com.uisrael.edu.ec.sispa.template.event;
 
-import javax.faces.event.SystemEvent;
-import javax.faces.event.SystemEventListener;
-
 import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
 
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.faces.event.SystemEvent;
+import javax.faces.event.SystemEventListener;
 
 /**
  * Created by rmpestano on 28/04/17.
