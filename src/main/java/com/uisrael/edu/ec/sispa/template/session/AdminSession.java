@@ -1,7 +1,8 @@
 package com.uisrael.edu.ec.sispa.template.session;
 
-import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+
+import javax.enterprise.context.SessionScoped;
 
 /**
  * Created by rmpestano on 04/02/17

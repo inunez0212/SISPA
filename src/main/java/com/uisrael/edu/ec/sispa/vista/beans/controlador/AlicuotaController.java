@@ -24,10 +24,10 @@ import javax.inject.Named;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.SerializationUtils;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.collections.CollectionUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.event.UnselectEvent;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.uisrael.edu.ec.sispa.constantes.Constantes;
 import com.uisrael.edu.ec.sispa.persistencia.dto.AlicuotaDTO;
@@ -139,17 +139,19 @@ public class AlicuotaController implements Serializable{
 	
 	public void guardar() {
     	try {
-			for(AlicuotaDTO alicuota : this.idAlicuotaPagoCol) {
-				//this.seleccionarAlicuota(alicuota);
-				alicuota.setFechaPago(new Date());
-				alicuota.setValorPagado(alicuotaSelectedDTO.getValorAlicuota());
-				alicuota.setUsuario(this.sessionController.getNombreUsuarioLogueado());
-				this.alicuotaServicio.actualizarAlicuota(alicuota);
-			}
-			this.imprimir();
-			this.inicializar();
-			
-			JsfUtil.addSuccessMessage("Pago guardado correctamente");
+    		if(CollectionUtils.isNotEmpty(idAlicuotaPagoCol)) {
+    			for(AlicuotaDTO alicuota : this.idAlicuotaPagoCol) {
+    				alicuota.setFechaPago(new Date());
+    				alicuota.setValorPagado(alicuotaSelectedDTO.getValorAlicuota());
+    				alicuota.setUsuario(this.sessionController.getNombreUsuarioLogueado());
+    				this.alicuotaServicio.actualizarAlicuota(alicuota);
+    			}
+    			JsfUtil.addSuccessMessage("Pago guardado correctamente");
+    			this.imprimir();
+    			this.inicializar();
+    		}else {
+    			JsfUtil.addErrorMessage("Debe seleccionar al menos una alicuota");
+    		}
      	}catch (Exception e) {
     		e.printStackTrace();
 			JsfUtil.addErrorMessage("No se pudo guardar el pago de la alicuota");
@@ -165,9 +167,9 @@ public class AlicuotaController implements Serializable{
 		boolean estadoRegistro = true;
 		if(alicuotaSelectedDTO == null) {
 			estadoRegistro = false;
-		}else if(alicuotaSelectedDTO.getValorPagado()==null || alicuotaSelectedDTO.getValorPagado().compareTo(BigDecimal.ONE)< 0) {
+		}else if(alicuotaSelectedDTO.getValorPagado()==null || alicuotaSelectedDTO.getValorPagado().compareTo(alicuotaSelectedDTO.getValorAlicuota())!= 0) {
 			estadoRegistro = false;
-			JsfUtil.addErrorMessage("El valor del pago debe ser mayor a 1");
+			JsfUtil.addErrorMessage("El valor del pago debe ser igual al de la alicuota");
 		}
 		return estadoRegistro;
 	}
@@ -187,17 +189,34 @@ public class AlicuotaController implements Serializable{
         parametros.put("propietario", idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getPropietarioDTO().getNombre() 
         		+ " "+ idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getPropietarioDTO().getApellido());
         parametros.put("cedula", idAlicuotaPagoCol.iterator().next().getDepartamentoDTO().getPropietarioDTO().getCedula());
-        parametros.put("anio", "2019");
-        parametros.put("mes", "Enero");
-        parametros.put("alicuota", idAlicuotaPagoCol.iterator().next().getValorAlicuota());
-        parametros.put("pago", this.sumarTotalAlicuotas(null));
+        
+        String mensajePago = "Recibo por concepto de pago de alicuota de los meses: " + this.obtenerMesesPagadosAlicuotas();
+        parametros.put("mensaje", mensajePago);
+        parametros.put("pago", this.obtenerTotalAlicuotas());
         parametros.put("usuario", idAlicuotaPagoCol.iterator().next().getUsuario());
         parametros.put("fecha", formatDate.format(idAlicuotaPagoCol.iterator().next().getFechaPago()));
         this.generarPDF(parametros, jasperPath, filename);
     }
             
 
-    public void generarPDF(Map<String, Object> params, String jasperPhath,  String fileName ) throws JRException, IOException {
+    private BigDecimal obtenerTotalAlicuotas() {
+    	BigDecimal total = BigDecimal.ZERO;
+    	for(AlicuotaDTO alicuota : idAlicuotaPagoCol) {
+    		total = total.add(alicuota.getValorAlicuota());
+    	}
+    	return total;
+	}
+
+	private String obtenerMesesPagadosAlicuotas() {
+		String mensaje = "";
+    	for(AlicuotaDTO alicuota : idAlicuotaPagoCol) {
+    		mensaje = mensaje + alicuota.getMes() + " "+alicuota.getAnio() +", "; 
+    	}
+    	mensaje = mensaje.substring(0, mensaje.length()-2);
+		return mensaje;
+	}
+
+	public void generarPDF(Map<String, Object> params, String jasperPhath,  String fileName ) throws JRException, IOException {
         String relativeWebPath = FacesContext.getCurrentInstance().getExternalContext().getRealPath(jasperPhath);
         File file = new File(relativeWebPath);
         List<JRDataSource> datasurce = new ArrayList<>();

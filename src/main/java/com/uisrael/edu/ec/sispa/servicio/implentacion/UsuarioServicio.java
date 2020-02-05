@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import com.uisrael.edu.ec.sispa.constantes.Constantes;
 import com.uisrael.edu.ec.sispa.persistencia.dao.interfaces.IUsuarioDAO;
-import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IUsuarioServicio;
 

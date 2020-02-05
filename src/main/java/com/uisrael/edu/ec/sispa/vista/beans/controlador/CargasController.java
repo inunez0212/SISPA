@@ -83,8 +83,9 @@ public class CargasController implements Serializable{
     		CatalogoDTO catalogoAlicuota = this.catalogoServicio.buscarPorId(Constantes.VALOR_ALICUOTA);
     		if(catalogoAlicuota==null || StringUtils.isBlank(catalogoAlicuota.getValorCatalogo())) {
     			throw new Exception("No existe el valor de la alicuota");
-    		}
+       		}
     		valorAlicuota = Double.parseDouble(catalogoAlicuota.getValorCatalogo());
+    		alicuotaController.inicializar();
     		this.alicuotasServicio.generarNuevoAnio(this.anio, this.sessionController.getNombreUsuarioLogueado(),
     				BigDecimal.valueOf(this.valorAlicuota));
     		this.inicializar();

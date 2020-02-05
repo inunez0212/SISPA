@@ -1,14 +1,15 @@
 package com.uisrael.edu.ec.sispa.template.util;
 
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpServletRequest;
+import static java.lang.String.format;
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-import static java.lang.String.format;
-import static java.nio.charset.StandardCharsets.UTF_8;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 public class AdminUtils {
 

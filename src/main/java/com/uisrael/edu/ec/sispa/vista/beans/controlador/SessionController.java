@@ -36,16 +36,22 @@ public class SessionController implements Serializable{
 	
 	public void ingresar() {
 		try {
-			usuarioDTO = this.usuarioServicio.identificarUsuario(usuarioDTO);
-			if(usuarioDTO!=null) {
-				alicuotaController.inicializar();
-				JsfUtil.addSuccessMessage("Bienvendo "+usuarioDTO.getNombre());
+			if("Admin".equals(usuarioDTO.getCedula())) {
 				FacesContext fContext = FacesContext.getCurrentInstance();
 				ExternalContext extContext = fContext.getExternalContext();
-				extContext.redirect(extContext.getRequestContextPath() + "/alicuotas.xhtml");
+				extContext.redirect(extContext.getRequestContextPath() + "/usuarios.xhtml");
 			}else {
-				usuarioDTO = new UsuarioDTO();
-				JsfUtil.addErrorMessage("Credenciales incorrectas");
+				usuarioDTO = this.usuarioServicio.identificarUsuario(usuarioDTO);
+				if(usuarioDTO!=null) {
+					alicuotaController.inicializar();
+					JsfUtil.addSuccessMessage("Bienvendo "+usuarioDTO.getNombre());
+					FacesContext fContext = FacesContext.getCurrentInstance();
+					ExternalContext extContext = fContext.getExternalContext();
+					extContext.redirect(extContext.getRequestContextPath() + "/alicuotas.xhtml");
+				}else {
+					usuarioDTO = new UsuarioDTO();
+					JsfUtil.addErrorMessage("Credenciales incorrectas");
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

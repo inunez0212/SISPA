@@ -1,15 +1,15 @@
 package com.uisrael.edu.ec.sispa.templates.beans;
 
+import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
+
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
-
-import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
-
-import java.io.Serializable;
 
 /**
  * Created by rmpestano on 07/01/17.

@@ -8,9 +8,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.uisrael.edu.ec.sispa.persistencia.dao.implementacion.PropietarioDAO;
-import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
-import com.uisrael.edu.ec.sispa.persistencia.dto.FacturaDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.PropietarioDTO;
 
 /**
