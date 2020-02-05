@@ -12,7 +12,7 @@ import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.DetalleFacturaDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IDetalleFacturaDAO extends JpaRepository<DetalleFacturaDTO, Long> {	

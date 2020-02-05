@@ -15,7 +15,7 @@ import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IUsuarioServicio;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Service

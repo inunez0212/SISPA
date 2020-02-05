@@ -17,7 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Entity

@@ -16,7 +16,7 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.IUsuarioServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Named("sessionController")

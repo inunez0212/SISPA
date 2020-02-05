@@ -14,7 +14,7 @@ import com.uisrael.edu.ec.sispa.persistencia.dto.FacturaDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.PropietarioDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IPropietarioDAO extends JpaRepository<PropietarioDTO, Long>{/**
