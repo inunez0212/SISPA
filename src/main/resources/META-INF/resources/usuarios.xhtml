@@ -49,7 +49,7 @@
 					<p:inputText id="telefono2" value="#{usuarioController.usuarioDTO.telefono2}"
 						disabled="false" style="width:99%" maxlength="10"/>
 					<p:outputLabel value="Estado" for="estado" />
-					<p:selectOneMenu id="estado" disabled="#{!usuarioController.esEdicion}"
+					<p:selectOneMenu id="estado" 
 						value="#{usuarioController.usuarioDTO.estado}">
 						<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
 						<f:selectItem itemValue="0" itemLabel="Inactivo"></f:selectItem>

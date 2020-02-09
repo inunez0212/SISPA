@@ -58,6 +58,7 @@ public class CatalogoController implements Serializable{
 	
 	public void registrar() {
     	try {
+    		catalogoDTO.setEstado("1");
     		if(this.validarRegistro()) {
     			this.catalogoServicio.registrar(catalogoDTO);
     			inicializar();
