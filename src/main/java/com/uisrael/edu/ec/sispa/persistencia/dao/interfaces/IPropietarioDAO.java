@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.uisrael.edu.ec.sispa.persistencia.dto.PropietarioDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IPropietarioDAO extends JpaRepository<PropietarioDTO, Long>{/**

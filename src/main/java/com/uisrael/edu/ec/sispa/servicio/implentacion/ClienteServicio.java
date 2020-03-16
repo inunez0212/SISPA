@@ -4,7 +4,7 @@
 package com.uisrael.edu.ec.sispa.servicio.implentacion;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public class ClienteServicio {

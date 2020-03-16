@@ -6,7 +6,7 @@ package com.uisrael.edu.ec.sispa.servicio.implentacion;
 import com.uisrael.edu.ec.sispa.servicio.interfaces.IArticuloServicio;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public class ArticuloServicio implements IArticuloServicio {

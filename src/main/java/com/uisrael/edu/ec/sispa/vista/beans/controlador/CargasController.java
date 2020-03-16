@@ -22,7 +22,7 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
 /**
- * @author kali
+ * @author Jorge
  *
  */
 @Named("cargasController")

@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.uisrael.edu.ec.sispa.persistencia.dto.DetalleFacturaDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IDetalleFacturaDAO extends JpaRepository<DetalleFacturaDTO, Long> {	

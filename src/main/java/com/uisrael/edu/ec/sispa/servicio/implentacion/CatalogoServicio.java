@@ -15,7 +15,7 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 
 /**
  * 
- * @author Ivan
+ * @author Jorge
  *
  */
 @Service

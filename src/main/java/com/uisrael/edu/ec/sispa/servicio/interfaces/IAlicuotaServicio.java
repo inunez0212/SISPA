@@ -10,7 +10,7 @@ import com.uisrael.edu.ec.sispa.persistencia.dto.DepartamentoDTO;
 
 /**
  * 
- * @author kali
+ * @author Jorge
  *
  */
 public interface IAlicuotaServicio {

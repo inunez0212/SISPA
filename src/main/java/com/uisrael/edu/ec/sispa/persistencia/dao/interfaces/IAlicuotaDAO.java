@@ -16,7 +16,7 @@ import com.uisrael.edu.ec.sispa.persistencia.dto.AlicuotaDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.DepartamentoDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{

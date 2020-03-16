@@ -27,7 +27,7 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.IAlicuotaServicio;
 import au.com.bytecode.opencsv.CSVReader;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Service

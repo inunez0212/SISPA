@@ -4,7 +4,7 @@
 package com.uisrael.edu.ec.sispa.persistencia.dao.implementacion;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public class ArticuloDAO  {

@@ -46,7 +46,7 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 /**
- * @author kali
+ * @author Jorge
  *
  */
 @Named("alicuotaController")

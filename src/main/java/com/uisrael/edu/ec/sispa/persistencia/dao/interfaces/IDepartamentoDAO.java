@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.uisrael.edu.ec.sispa.persistencia.dto.DepartamentoDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IDepartamentoDAO extends JpaRepository<DepartamentoDTO, Long> {	/**
