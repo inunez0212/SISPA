@@ -9,7 +9,7 @@
 	<ui:define name="body">
 		<h:form id="alicuotaForm">
 			<p:dataTable id="alicuotaDT" var="a" filteredValue="#{alicuotaController.departamentoFilteredDTOList}"
-				value="#{alicuotaController.departamentoDTOList}" rowKey="#{a.id}"
+				value="#{alicuotaController.departamentoDTOList}" rowKey="#{a.id}" 
 				scrollable="true" scrollHeight="230" style="font-size: 16px;">
 				<p:column style="width:70px;text-align: center">
 					<p:commandButton update="alicuotaForm"
@@ -83,7 +83,7 @@
 				<p:outputPanel id="pagoDetail" style="text-align:center;">
 		            <p> Propietario: #{alicuotaController.departamentoSelectedDTO.propietarioDTO.nombre} #{alicuotaController.departamentoSelectedDTO.propietarioDTO.apellido}</p>
 						<p:dataTable scrollable="true" scrollHeight="200" id="checkboxDT" var="alicuota" value="#{alicuotaController.alicuotasPendientes(alicuotaController.departamentoSelectedDTO.id)}"
-						 selection="#{alicuotaController.idAlicuotaPagoCol}" rowKey="#{alicuota.id}" style="margin-bottom:0" emptyMessage="No tiene alicuotas pendientes" >
+						 selection="#{alicuotaController.idAlicuotaPagoCol}" rowKey="#{alicuota.id}" style="margin-bottom:0" emptyMessage="No tiene alicuotas pendientes" rowSelectMode="checkbox">
 					        <p:ajax  event="rowSelectCheckbox" update="checkboxDT:total" process="@this" listener="#{alicuotaController.sumarTotalAlicuotas}"></p:ajax>
 					        <p:ajax  event="rowUnselectCheckbox" update="checkboxDT:total" process="@this" listener="#{alicuotaController.restarTotalAlicuotas}"></p:ajax>
 					        <p:column  selectionMode="multiple" style="width:40px;text-align:center"/>

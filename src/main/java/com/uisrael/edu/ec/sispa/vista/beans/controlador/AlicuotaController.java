@@ -240,6 +240,7 @@ public class AlicuotaController implements Serializable{
     }
     
     public void inicializarTotal() {
+    	this.idAlicuotaPagoCol = new ArrayList<>();
     	this.totalAlicuotas = BigDecimal.ZERO;
     }
     
