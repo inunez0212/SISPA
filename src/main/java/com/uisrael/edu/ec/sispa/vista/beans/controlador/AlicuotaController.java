@@ -142,7 +142,7 @@ public class AlicuotaController implements Serializable{
     		if(CollectionUtils.isNotEmpty(idAlicuotaPagoCol)) {
     			for(AlicuotaDTO alicuota : this.idAlicuotaPagoCol) {
     				alicuota.setFechaPago(new Date());
-    				alicuota.setValorPagado(alicuotaSelectedDTO.getValorAlicuota());
+    				alicuota.setValorPagado(alicuota.getValorAlicuota());
     				alicuota.setUsuario(this.sessionController.getNombreUsuarioLogueado());
     				this.alicuotaServicio.actualizarAlicuota(alicuota);
     			}

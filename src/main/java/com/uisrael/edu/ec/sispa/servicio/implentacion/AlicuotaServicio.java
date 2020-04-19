@@ -190,7 +190,7 @@ public class AlicuotaServicio implements IAlicuotaServicio{
 	 */
 	@Override
 	public Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento) {
-		return this.alicuotaDAO.findByDepartamentoDTO(departamento);
+		return this.alicuotaDAO.findByDepartamentoDTOOrderById(departamento);
 	}
 
 	/**
@@ -198,7 +198,7 @@ public class AlicuotaServicio implements IAlicuotaServicio{
 	 */
 	@Override
 	public List<AlicuotaDTO> findByDepartamentoDTOAndValorPagadoIsNull(DepartamentoDTO departamento) {
-		return this.alicuotaDAO.findByDepartamentoDTOAndValorPagadoIsNull(departamento);
+		return this.alicuotaDAO.findByDepartamentoDTOAndValorPagadoIsNullOrderById(departamento);
 	}
 
 	/**

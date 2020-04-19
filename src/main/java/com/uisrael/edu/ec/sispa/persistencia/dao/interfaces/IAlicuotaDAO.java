@@ -72,7 +72,7 @@ public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{
 	@Modifying
 	@Query("insert into AlicuotaDTO(anio, estado, mes, usuario, valorAlicuota, departamentoDTO) " + 
 			"select ?1, a.estado, a.mes, ?2, ?3, a.departamentoDTO " + 
-			"from AlicuotaDTO a ")
+			"from AlicuotaDTO a where a.anio ='2020' order by a.id")
 	void insertNuevoAnio(String anio, String usuario, BigDecimal valorAlicuota);
 
 	/**
@@ -89,12 +89,12 @@ public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{
 	 * @param departamento
 	 * @return
 	 */
-	public Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento);
+	public Collection<AlicuotaDTO> findByDepartamentoDTOOrderById(DepartamentoDTO departamento);
 
 	/**
 	 * 
 	 * @param departamento
 	 * @return
 	 */
-	public List<AlicuotaDTO> findByDepartamentoDTOAndValorPagadoIsNull(DepartamentoDTO departamento);
+	public List<AlicuotaDTO> findByDepartamentoDTOAndValorPagadoIsNullOrderById(DepartamentoDTO departamento);
 }

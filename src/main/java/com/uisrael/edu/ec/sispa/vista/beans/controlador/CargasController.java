@@ -85,10 +85,10 @@ public class CargasController implements Serializable{
     			throw new Exception("No existe el valor de la alicuota");
        		}
     		valorAlicuota = Double.parseDouble(catalogoAlicuota.getValorCatalogo());
-    		alicuotaController.inicializar();
     		this.alicuotasServicio.generarNuevoAnio(this.anio, this.sessionController.getNombreUsuarioLogueado(),
     				BigDecimal.valueOf(this.valorAlicuota));
     		this.inicializar();
+    		alicuotaController.inicializar();
     		JsfUtil.addSuccessMessage("Datos para el año " +this.anio+" cargados correctamente" );
     	}catch (Exception ioe) {
     		JsfUtil.addErrorMessage("Error, "+ ioe.getMessage());
