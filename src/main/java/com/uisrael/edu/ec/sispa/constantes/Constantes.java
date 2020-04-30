@@ -3,7 +3,9 @@ package com.uisrael.edu.ec.sispa.constantes;
 public final class Constantes {
 	
 	public static final String ESTADO_ACTIVO = "1";
+	
 	public static final String ANIO_CARGA ="ANIO";
+	public static final String VALOR_ALICUOTA = "ALIC";	
 	public static final char DELIMITADOR_ARCHIVO = ';';
 	public static final int ARCHIVO_POSICION_CEDULA = 0;
 	public static final int ARCHIVO_POSICION_NOMBRE = 1;

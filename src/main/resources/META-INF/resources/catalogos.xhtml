@@ -34,12 +34,6 @@
 							var="items" itemLabel="#{items.id}"
 							itemValue="#{items.id}"></f:selectItems>
 					</p:selectOneMenu>
-					<p:outputLabel value="Estado" for="estado" />
-					<p:selectOneMenu id="estado"
-						value="#{catalogoController.catalogoDTO.estado}">
-						<f:selectItem itemValue="1" itemLabel="Activo"></f:selectItem>
-					</p:selectOneMenu>
-					
 				</p:panelGrid>
 				<p:panelGrid columns="4" style="width: 50%; margin: 0px auto;" layout="grid">
 						<p:commandButton value="Nuevo" actionListener="#{catalogoController.inicializar}" update="formAlicuotas"/>

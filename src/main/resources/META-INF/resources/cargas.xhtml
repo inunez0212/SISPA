@@ -16,9 +16,7 @@
 		                  invalidSizeMessage="El tamaño máximo es 10Mb" uploadLabel="Cargar" label="Seleccionar" 
 		                   />
 		<h3>Cargar datos para un nuevo año</h3>
-			<p:panelGrid layout="grid" columns="5" style="width:49%; " >
-				<p:outputLabel value="Valor alicuota " for="alicuota" style="margin-top:3px"/>
-				<p:inputText id="alicuota" value="#{cargasController.valorAlicuota}" size="5" maxlength="5" type="integer"/>
+			<p:panelGrid layout="grid" columns="5" style="width:100%; " >
 				<p:outputLabel value="Año" for="anio" style="margin-top:3px"/>
 				<p:selectOneMenu id="anio"
 					value="#{cargasController.anio}">

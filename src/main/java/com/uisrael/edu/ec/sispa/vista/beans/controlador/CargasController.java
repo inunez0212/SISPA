@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
 
+import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.FileUploadEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -21,7 +22,7 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
 /**
- * @author kali
+ * @author Jorge
  *
  */
 @Named("cargasController")
@@ -46,7 +47,7 @@ public class CargasController implements Serializable{
 		
 	private String anio;
 	
-	private Integer valorAlicuota;
+	private Double valorAlicuota;
 	
 	private List<CatalogoDTO> catalogosAnio;
 	
@@ -78,13 +79,16 @@ public class CargasController implements Serializable{
     
     public void nuevoAnio() {
     	try {
-    		if(valorAlicuota==null || anio==null) {
-    			JsfUtil.addErrorMessage("Los datos de alicuota y año son requiridos");
-    		}
-    		alicuotaController.inicializar();
+    		
+    		CatalogoDTO catalogoAlicuota = this.catalogoServicio.buscarPorId(Constantes.VALOR_ALICUOTA);
+    		if(catalogoAlicuota==null || StringUtils.isBlank(catalogoAlicuota.getValorCatalogo())) {
+    			throw new Exception("No existe el valor de la alicuota");
+       		}
+    		valorAlicuota = Double.parseDouble(catalogoAlicuota.getValorCatalogo());
     		this.alicuotasServicio.generarNuevoAnio(this.anio, this.sessionController.getNombreUsuarioLogueado(),
     				BigDecimal.valueOf(this.valorAlicuota));
     		this.inicializar();
+    		alicuotaController.inicializar();
     		JsfUtil.addSuccessMessage("Datos para el año " +this.anio+" cargados correctamente" );
     	}catch (Exception ioe) {
     		JsfUtil.addErrorMessage("Error, "+ ioe.getMessage());
@@ -145,20 +149,6 @@ public class CargasController implements Serializable{
 	 */
 	public void setCatalogosAnio(List<CatalogoDTO> catalogosAnio) {
 		this.catalogosAnio = catalogosAnio;
-	}
-
-	/**
-	 * @return the valorAlicuota
-	 */
-	public Integer getValorAlicuota() {
-		return valorAlicuota;
-	}
-
-	/**
-	 * @param valorAlicuota the valorAlicuota to set
-	 */
-	public void setValorAlicuota(Integer valorAlicuota) {
-		this.valorAlicuota = valorAlicuota;
 	}
 
 	

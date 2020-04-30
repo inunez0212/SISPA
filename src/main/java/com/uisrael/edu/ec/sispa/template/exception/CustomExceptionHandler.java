@@ -1,10 +1,14 @@
 package com.uisrael.edu.ec.sispa.template.exception;
 
-import org.omnifaces.util.Exceptions;
-import org.omnifaces.util.Messages;
+import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
 
-import com.uisrael.edu.ec.sispa.template.util.Constants;
-import com.uisrael.edu.ec.sispa.template.util.WebXml;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
@@ -15,15 +19,11 @@ import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.PhaseId;
 import javax.servlet.http.HttpServletRequest;
 
-import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
+import org.omnifaces.util.Exceptions;
+import org.omnifaces.util.Messages;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.uisrael.edu.ec.sispa.template.util.Constants;
+import com.uisrael.edu.ec.sispa.template.util.WebXml;
 
 /**
  * Based on:

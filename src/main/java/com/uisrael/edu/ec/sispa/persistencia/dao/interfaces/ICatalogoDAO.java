@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Repository

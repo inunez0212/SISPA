@@ -8,7 +8,7 @@ import java.util.List;
 import com.uisrael.edu.ec.sispa.persistencia.dto.UsuarioDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IUsuarioServicio {

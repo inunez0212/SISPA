@@ -20,7 +20,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Entity

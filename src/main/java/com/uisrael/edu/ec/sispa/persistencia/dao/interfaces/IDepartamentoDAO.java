@@ -8,11 +8,10 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 import com.uisrael.edu.ec.sispa.persistencia.dto.DepartamentoDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IDepartamentoDAO extends JpaRepository<DepartamentoDTO, Long> {	/**

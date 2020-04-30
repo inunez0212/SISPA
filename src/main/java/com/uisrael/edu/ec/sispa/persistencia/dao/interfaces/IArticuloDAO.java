@@ -9,10 +9,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.uisrael.edu.ec.sispa.persistencia.dto.ArticuloDTO;
-import com.uisrael.edu.ec.sispa.persistencia.dto.CatalogoDTO;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 public interface IArticuloDAO extends JpaRepository<ArticuloDTO, Long> {	/**

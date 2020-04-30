@@ -4,12 +4,6 @@ package com.uisrael.edu.ec.sispa.template.config;
 import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
 
 import java.io.IOException;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Named;
-
-import com.uisrael.edu.ec.sispa.template.util.Constants;
-
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -17,6 +11,12 @@ import java.text.SimpleDateFormat;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
+
+import com.uisrael.edu.ec.sispa.template.util.Constants;
 
 
 /**

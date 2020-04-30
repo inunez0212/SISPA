@@ -1,15 +1,5 @@
 package com.uisrael.edu.ec.sispa.template.session;
 
-import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
-import com.uisrael.edu.ec.sispa.template.util.Constants;
-
-import javax.enterprise.inject.spi.CDI;
-import javax.inject.Inject;
-import javax.servlet.*;
-import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import static com.uisrael.edu.ec.sispa.template.util.Assert.has;
 
 import java.io.FileNotFoundException;
@@ -22,6 +12,21 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.enterprise.inject.spi.CDI;
+import javax.inject.Inject;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.uisrael.edu.ec.sispa.template.config.AdminConfig;
+import com.uisrael.edu.ec.sispa.template.util.Constants;
 
 /**
  * Based on https://github.com/conventions/core/blob/master/src/main/java/org/conventionsframework/filter/ConventionsFilter.java

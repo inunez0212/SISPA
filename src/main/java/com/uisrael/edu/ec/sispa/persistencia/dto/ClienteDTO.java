@@ -13,7 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Entity

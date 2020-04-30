@@ -16,7 +16,7 @@ import com.uisrael.edu.ec.sispa.servicio.interfaces.ICatalogoServicio;
 import com.uisrael.edu.ec.sispa.vista.beans.util.JsfUtil;
 
 /**
- * @author Ivan
+ * @author Jorge
  *
  */
 @Named("catalogoController")
@@ -58,6 +58,7 @@ public class CatalogoController implements Serializable{
 	
 	public void registrar() {
     	try {
+    		catalogoDTO.setEstado("1");
     		if(this.validarRegistro()) {
     			this.catalogoServicio.registrar(catalogoDTO);
     			inicializar();
