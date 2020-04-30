@@ -50,7 +50,7 @@ public class UsuarioServicio implements IUsuarioServicio{
 	}
 	@Override
 	public List<UsuarioDTO> listarTodos() {
-		return this.usuarioDAO.findByEstado(Constantes.ESTADO_ACTIVO);
+		return this.usuarioDAO.findAll();
 	}
 	
 	@Override
