@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -189,7 +188,7 @@ public class AlicuotaServicio implements IAlicuotaServicio{
 	 * {inheritDoc}
 	 */
 	@Override
-	public Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento) {
+	public List<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento) {
 		return this.alicuotaDAO.findByDepartamentoDTOOrderById(departamento);
 	}
 

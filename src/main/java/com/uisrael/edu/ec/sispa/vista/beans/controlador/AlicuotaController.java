@@ -137,6 +137,13 @@ public class AlicuotaController implements Serializable{
 		return this.alicuotaServicio.findByDepartamentoDTOAndValorPagadoIsNull(departamento);
 	}
 	
+	public List<AlicuotaDTO> obtenerAlicuotas(Integer idDepartamento){
+		DepartamentoDTO departamento = this.departamentoServicio.findById(idDepartamento);
+		this.idAlicuotaPagoCol = new ArrayList<>();
+		return this.alicuotaServicio.findByDepartamentoDTO(departamento);
+	}
+	
+	
 	public void guardar() {
     	try {
     		if(CollectionUtils.isNotEmpty(idAlicuotaPagoCol)) {

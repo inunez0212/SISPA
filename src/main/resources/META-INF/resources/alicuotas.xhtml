@@ -48,7 +48,7 @@
 			<p:dialog header="Departamento #{alicuotaController.departamentoSelectedDTO.bloque}-#{alicuotaController.departamentoSelectedDTO.numero}" widgetVar="alicuotaDialog" height="60%" width="50%"
 				modal="true" showEffect="fade" hideEffect="fade" resizable="false">
 				<p:outputPanel id="alicuotaDetail" style="text-align:center;" >
-					<p:dataTable value="#{alicuotaController.departamentoSelectedDTO.alicuotasCOL}" var="alicuota"
+					<p:dataTable value="#{alicuotaController.obtenerAlicuotas(alicuotaController.departamentoSelectedDTO.id)}" var="alicuota"
 						rowKey="#{alicuota.id}" paginator="true" rows="6" 
 						styleClass="paginated"> 
 						<f:facet name="header">

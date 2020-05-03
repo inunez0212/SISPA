@@ -2,7 +2,6 @@ package com.uisrael.edu.ec.sispa.servicio.interfaces;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.List;
 
 import com.uisrael.edu.ec.sispa.persistencia.dto.AlicuotaDTO;
@@ -39,7 +38,7 @@ public interface IAlicuotaServicio {
 	 * @param departamento
 	 * @return
 	 */
-	Collection<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento);
+	List<AlicuotaDTO> findByDepartamentoDTO(DepartamentoDTO departamento);
 
 	/**
 	 * Busca alicuotas pendientes por departamento

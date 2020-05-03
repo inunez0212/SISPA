@@ -89,7 +89,7 @@ public interface IAlicuotaDAO  extends JpaRepository<AlicuotaDTO, Long>{
 	 * @param departamento
 	 * @return
 	 */
-	public Collection<AlicuotaDTO> findByDepartamentoDTOOrderById(DepartamentoDTO departamento);
+	public List<AlicuotaDTO> findByDepartamentoDTOOrderById(DepartamentoDTO departamento);
 
 	/**
 	 * 
