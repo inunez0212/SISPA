@@ -9,7 +9,7 @@
 	<ui:define name="body">
 		<h:form id="alicuotaForm">
 			<p:dataTable id="alicuotaDT" var="a" filteredValue="#{alicuotaController.departamentoFilteredDTOList}"
-				value="#{alicuotaController.departamentoDTOList}" rowKey="#{a.id}" 
+				value="#{alicuotaController.departamentoDTOList}" rowKey="#{a.id}" emptyMessage="No existen datos para los filtros ingresados"
 				scrollable="true" scrollHeight="230" style="font-size: 16px;">
 				<p:column style="width:70px;text-align: center">
 					<p:commandButton update="alicuotaForm"

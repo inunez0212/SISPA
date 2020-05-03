@@ -57,11 +57,11 @@ public class UsuarioController implements Serializable{
     		if(this.validarRegistro()) {
     			this.usuarioServicio.registrar(usuarioDTO);
     			inicializar();
-    			JsfUtil.addSuccessMessage("Usuario creado correctamente");
+    			JsfUtil.addSuccessMessage("Usuario guardado correctamente");
     		}
     	}catch (Exception e) {
     		e.printStackTrace();
-			JsfUtil.addErrorMessage("No se pudo crear el Usuario");
+			JsfUtil.addErrorMessage("No se guadar crear el Usuario");
 		}
     }
 	
